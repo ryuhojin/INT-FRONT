@@ -1,0 +1,7 @@
+@import url(tailwind.css);
+@import url(font.css);
+html,
+body,
+#__next {
+  height: 100%;
+}
