@@ -5,7 +5,7 @@ import UserInfo from "../../components/user/UserInfo";
 import { RootState } from "../../store/modules";
 import Router from "next/router";
 import { delCookie } from "../../utils/common";
-import { setSignOutThunk } from "../../store/modules/user";
+import { setSignOutThunk, setUpdateUserThunk } from "../../store/modules/user";
 import { useEffect } from "react";
 const MyInfoContainer = () => {
   const { user } = useSelector((state: RootState) => state.user.user);
@@ -14,8 +14,8 @@ const MyInfoContainer = () => {
   const [inputState, setInputState] = useState(false);
 
   useEffect(() => {
-    setUserEdit(user)
-  }, [user])
+    setUserEdit(user);
+  }, [user]);
 
   const toggleState = () => setInputState(!inputState);
 
@@ -41,10 +41,8 @@ const MyInfoContainer = () => {
     }
   };
   const updateAccount = async () => {
-    const response = await updateUserInfo(userEdit);
-    if (response.status === 200) {
-      alert("내정보 변경 성공");
-    }
+    await dispatch(setUpdateUserThunk(userEdit));
+    toggleState();
   };
 
   const deleteAccount = async () => {

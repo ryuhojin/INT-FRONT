@@ -8,7 +8,7 @@ const Header = ({ userMenu, onHome, tabState, onGetUserInfo, onSignout }: any) =
                 {userMenu}
             </div>
         </div>
-        <div className={(tabState == false ? "hidden " : "flex flex-col ") + "w-full items-center justify-center mt-20 absolute z-20 bg-gray-50 border-b transition-all"}>
+        <div className={(tabState == false ? "hidden " : "flex flex-col ") + "w-full top-0 items-center justify-center mt-20 absolute z-20  border-b transition-all bg-gray-50"}>
             <div className="flex w-full h-10 justify-center items-center cursor-pointer hover:bg-gray-200 hover:text-cusblue-base" onClick={onGetUserInfo}>
                 내정보
             </div>

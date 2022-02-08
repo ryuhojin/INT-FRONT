@@ -22,7 +22,8 @@ export async function getUserInfo(userId: string) {
     const { data } = await service.get(`developer/${userId}`)
 }
 export async function updateUserInfo(params: { userId: string, name: string, email: string, gitUrl: string, webSiteUrl: string }) {
-    return await service.put('developer', params);
+    const {data} = await service.put('developer', params);
+    return data;
 }
 export async function deleteUser(userId: string) {
     return await service.delete(`developer/${userId}`)
