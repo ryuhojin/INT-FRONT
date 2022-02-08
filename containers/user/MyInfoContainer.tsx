@@ -6,17 +6,19 @@ import { RootState } from "../../store/modules";
 import Router from "next/router";
 import { delCookie } from "../../utils/common";
 import { setSignOutThunk } from "../../store/modules/user";
-
+import { useEffect } from "react";
 const MyInfoContainer = () => {
   const { user } = useSelector((state: RootState) => state.user.user);
   const dispatch = useDispatch();
+  const [userEdit, setUserEdit] = useState(user);
   const [inputState, setInputState] = useState(false);
 
-  const [userEdit, setUserEdit] = useState(user);
-  //   const [email, setEmail] = useState(user.email);
-  //   const [introduction, setIntroduction] = useState(user.introduction);
-  //   const [gitUrl, setGitUrl] = useState(user.gitUrl);
-  //   const [webSiteUrl, setWebSiteUrl] = useState(user.webSiteUrl);
+  useEffect(() => {
+    setUserEdit(user)
+  }, [user])
+
+  const toggleState = () => setInputState(!inputState);
+
   const onChangeUserData = (e: any) => {
     switch (e.target.name) {
       case "name":
@@ -60,9 +62,7 @@ const MyInfoContainer = () => {
       deleteAccount={deleteAccount}
       updateAccount={updateAccount}
       onChangeUserData={onChangeUserData}
-      toggleState={() => {
-        setInputState(true);
-      }}
+      toggleState={toggleState}
     />
   );
 };

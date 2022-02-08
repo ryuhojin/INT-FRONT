@@ -1,11 +1,11 @@
 import Seo from "../../components/common/Seo"
 import BaseLayout from "../../layouts/BaseLayout"
 import SigninContainer from "../../containers/user/SigninContainer"
-import HeaderBaseContainer from "../../containers/base/HeaderBaseContainer"
+import HeaderContainer from "../../containers/base/HeaderContainer"
 const SignInPage = () => {
     return <>
         <Seo title="로그인" />
-        <BaseLayout header={<HeaderBaseContainer />} body={<SigninContainer />} />
+        <BaseLayout header={<HeaderContainer />} body={<SigninContainer />} />
     </>
 }
 export default SignInPage
