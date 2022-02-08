@@ -19,11 +19,11 @@ const UserInfo = ({
 
   const github = inputState ? 
     <td><input className="w-full pl-2 outline-cusblue-base" onChange={onChangeUserData} name="gitUrl" type="text" value={paramsUser.gitUrl} placeholder="git 주소를 입력해주세요" /></td>:
-    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.gitUrl}https://github.com/ryuhojin</td>
+    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.gitUrl}</td>
 
   const website = inputState ?
     <td><input className="w-full pl-2 outline-cusblue-base" onChange={onChangeUserData} name="webSiteUrl" type="text" value={paramsUser.webSiteUrl} placeholder="블로그 주소를 입력해주세요" /></td> :
-    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.webSiteUrl}https://ryuhojin.tistory.com</td>
+    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.webSiteUrl}</td>
 
   const email = inputState ?
   <td><input className="w-full pl-2 outline-cusblue-base" onChange={onChangeUserData} name="email" type="email" value={paramsUser.email} placeholder="Email 주소를 입력해주세요" /></td> :
@@ -31,7 +31,7 @@ const UserInfo = ({
 
   const group = inputState ?
     <td><input className="w-full pl-2 outline-cusblue-base" onChange={onChangeUserData} name="group" type="text" value={paramsUser.webSiteUrl} placeholder="소속을 입력해주세요" /></td> :
-    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.webSiteUrl}https://ryuhojin.tistory.com</td>
+    <td className="w-4/5 pl-2 overflow-hidden">{paramsUser.webSiteUrl}</td>
 
   const footer = isSameUser ?
     <div className="w-full flex justify-end mt-6 mb-10">

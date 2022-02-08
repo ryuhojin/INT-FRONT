@@ -4,12 +4,14 @@ const SignIn = ({
   onSubmit,
   setUsername,
   setPassword,
+  onSignup,
 }: {
   username: string;
   password: string;
   onSubmit: any;
   setUsername: any;
   setPassword: any;
+  onSignup: any;
 }) => {
   return (
     <>
@@ -34,7 +36,7 @@ const SignIn = ({
             className="w-full h-16 m-2 pl-3 border rounded-md outline-cusblue-base"
           />
           <span className="self-end my-2">
-            <span className="hover:text-cusblue-base cursor-pointer">
+            <span className="hover:text-cusblue-base cursor-pointer" onClick={onSignup}>
               회원가입
             </span>{" "}
             /{" "}

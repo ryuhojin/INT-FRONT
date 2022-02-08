@@ -1,10 +1,10 @@
 import Seo from "../../components/common/Seo"
 import HeaderContainer from "../../containers/base/HeaderContainer";
-import NHLayout from "../../layouts/NHLayout";
+import NFLayout from "../../layouts/NFLayout";
 const IssueListPage = () => {
     return <>
         <Seo title="이슈 목록" />
-        <NHLayout header={<HeaderContainer />} body={null} />
+        <NFLayout header={<HeaderContainer />} body={null} />
     </>
 }
 export default IssueListPage;

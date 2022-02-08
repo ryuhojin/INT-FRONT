@@ -20,6 +20,7 @@ const MyInfoContainer = () => {
   const toggleState = () => setInputState(!inputState);
 
   const onChangeUserData = (e: any) => {
+    e.preventDefault();
     switch (e.target.name) {
       case "name":
         setUserEdit({ ...userEdit, ...{ name: e.target.value } });

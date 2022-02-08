@@ -24,11 +24,14 @@ const SigninContainer = () => {
         username={username}
         password={password}
         setUsername={(e: any) => {
+            e.preventDefault();
             setUsername(e.target.value);
         }}
         setPassword={(e: any) => {
+            e.preventDefault();
             setPassword(e.target.value);
         }}
+        onSignup={()=>{Router.push('/user/signup')}}
         onSubmit={onSignin} />
 }
 export default SigninContainer;
