@@ -5,7 +5,6 @@ import { RootState } from "../../store/modules";
 import { getSearchListThunk, getSearchScrollThunk, setSearchAsync } from "../../store/modules/search";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect } from "react";
-import dynamic from "next/dynamic";
 import { noData } from '../../utils/common'
 const ListContainer = () => {
   const { search } = useSelector((state: RootState) => state.search);
