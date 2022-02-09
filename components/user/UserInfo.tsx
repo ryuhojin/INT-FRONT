@@ -13,6 +13,16 @@ const UserInfo = ({
 
   const isSameUser = user.userId == paramsUser.userId;
 
+  const name = inputState ? (<input
+    className="w-full pl-2 outline-cusblue-base"
+    onChange={onChangeUserData}
+    name="name"
+    type="text"
+    value={paramsUser.name}
+    placeholder="이름을 입력해주세요"
+  />) : <>{paramsUser.name}{" "}
+    <span className="text-cusblue-base">님의 정보입니다</span></>;
+
   const introduction = inputState ? (
     <textarea
       className="h-28 text-xl mt-4 overflow-hidden border-b outline-cusblue-base"
@@ -98,18 +108,18 @@ const UserInfo = ({
       <input
         className="w-full pl-2 outline-cusblue-base"
         onChange={onChangeUserData}
-        name="group"
+        name="groupName"
         type="text"
-        value={paramsUser.webSiteUrl}
+        value={paramsUser.groupName}
         placeholder="소속을 입력해주세요"
       />
     </td>
   ) : (
     <td className="w-4/5 pl-2 overflow-hidden">
-      {paramsUser.webSiteUrl == "" ? (
+      {paramsUser.groupName == "" ? (
         <span className="text-gray-300">미 입력</span>
       ) : (
-        paramsUser.webSiteUrl
+        paramsUser.groupName
       )}
     </td>
   );
@@ -143,8 +153,7 @@ const UserInfo = ({
     <>
       <div className="w-full md:w-1/2 mt-10 mx-auto flex flex-col">
         <h1 className="text-3xl font-bold">
-          {paramsUser.name}{" "}
-          <span className="text-cusblue-base">님의 정보입니다</span>
+          {name}
         </h1>
         {introduction}
         <h1 className="text-xl font-bold text-cusblue-base mt-6">링크</h1>

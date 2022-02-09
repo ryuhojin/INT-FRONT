@@ -4,10 +4,9 @@ import { SearchListAction } from "./types";
 import { getIssueList } from "../../../api/modules/issue";
 import { getSearchListAsync, getSearchScrollAsync } from "./actions";
 
-export function getSearchListThunk(
-    query: string
-): ThunkAction<void, RootState, null, SearchListAction> {
+export function getSearchListThunk(query: string): ThunkAction<void, RootState, null, SearchListAction> {
     return async (dispatch) => {
+
         const { request, success, failure } = getSearchListAsync;
         dispatch(request());
         try {
@@ -19,10 +18,7 @@ export function getSearchListThunk(
     };
 }
 
-export function getSearchScrollThunk(
-    page: number,
-    query: string
-): ThunkAction<void, RootState, null, SearchListAction> {
+export function getSearchScrollThunk(page: number, query: string): ThunkAction<void, RootState, null, SearchListAction> {
     return async (dispatch) => {
         const { request, success, failure } = getSearchScrollAsync;
         dispatch(request());

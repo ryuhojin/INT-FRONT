@@ -9,5 +9,6 @@ export type SearchListState = {
         error: Error | null;
         list: [];
         pageable: {};
-    }
+    },
+    search: string
 }

@@ -60,6 +60,7 @@ export function setUpdateUserThunk(params: {
   email: string;
   gitUrl: string;
   webSiteUrl: string;
+  groupName: string;
 }): ThunkAction<void, RootState, null, UserAction> {
   return async (dispatch) => {
     const data = await updateUserInfo(params);

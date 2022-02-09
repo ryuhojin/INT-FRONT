@@ -1,6 +1,6 @@
 import { EventHandler, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteUser, updateUserInfo } from "../../api/modules/user";
+import { checkName, deleteUser, updateUserInfo } from "../../api/modules/user";
 import UserInfo from "../../components/user/UserInfo";
 import { RootState } from "../../store/modules";
 import Router from "next/router";
@@ -37,11 +37,16 @@ const MyInfoContainer = () => {
       case "webSiteUrl":
         setUserEdit({ ...userEdit, ...{ webSiteUrl: e.target.value } });
         break;
+      case "groupName":
+        setUserEdit({ ...userEdit, ...{ groupName: e.target.value } });
+        break;
       default:
         break;
     }
   };
   const updateAccount = async () => {
+    const { data } = await checkName(userEdit.name);
+    if (data.adobtYN) return;
     await dispatch(setUpdateUserThunk(userEdit));
     toggleState();
   };

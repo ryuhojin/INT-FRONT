@@ -6,7 +6,8 @@ import {
     GET_SEARCHLIST_ERROR,
     GET_SCROLLLIST,
     GET_SCROLLLIST_SUCCESS,
-    GET_SCROLLLIST_ERROR
+    GET_SCROLLLIST_ERROR,
+    SET_SEARCH
 } from "./actions";
 
 const initialState: SearchListState = {
@@ -22,6 +23,7 @@ const initialState: SearchListState = {
             query: "",
         },
     },
+    search: ""
 };
 
 const list = createReducer<SearchListState, SearchListAction>(initialState, {
@@ -99,6 +101,10 @@ const list = createReducer<SearchListState, SearchListAction>(initialState, {
             pageable: {},
         },
     }),
+    [SET_SEARCH]: (state, action) => ({
+        ...state,
+        search: action.payload
+    })
 });
 
 export default list;

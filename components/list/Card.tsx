@@ -1,11 +1,29 @@
-const Card = () => {
+const Card = ({ data }: any) => {
+  const solution = "border-l-orange-300 "
+  const solved = "border-l-cusblue-base "
+  const stateBorder = data.adoptYn ? solved : data.solutionCount !== 0 ? solution : "";
+
   return (
     <>
-      <div className="flex flex-col w-full md:w-1/2 mb-2 px-6 py-4 bg-white shadow-cusblue-light border border-l-4 border-l-red-400 rounded-xl">
-        <span className="text-md font-bold line-clamp-1">가나다라 마바사아 자차카타파하 자차카타파하 자차카타파하 제목입니다 가나다라마바사. </span>
-        <span className="text-sm line-clamp-2 mt-2">안녕하세요. 이것은 내용입니다. 테스트 해볼려고 이렇게 썻습니다.이것은 내용입니다. 테스트 해볼려고 이렇게 썻습니다.이것은 내용입니다. 테스트 해볼려고 이렇게 썻습니다. 여러분은 이것에 대해서 어떻게 생각하시나요? </span>
-        <span className="flex justify-between mt-1 text-xs text-gray-400"><span>류호진</span><span>2 개의 솔루션</span></span>
-        <span className="text-xs text-gray-400 self-center">2020.01.09</span>
+      <div className={stateBorder + "flex flex-col w-full md:w-1/2 mb-2 px-6 py-4 bg-white shadow-cusblue-light border border-l-4 rounded-xl cursor-pointer"}>
+        <span className="text-md font-bold line-clamp-1">{data.title} </span>
+        <span className="text-sm line-clamp-1 mt-2">{data.content}</span>
+        <hr className="mt-2" />
+        {data.hashtags.length ?
+          <div className="flex flex-start overflow-hidden mt-1">
+            {data.hashtags.map((v: any, index: number) => {
+              return <span key={index} className="mr-1 font-bold text-gray-500 text-xs border px-1 rounded-md bg-gray-100">{`#${v}`}</span>
+            })}
+          </div>
+          : ""}
+        <span className="flex justify-between mt-1 text-xs text-cusbronze-dark"><span>{data.developer.name}</span><span>{data.solutionCount} 개의 솔루션</span></span>
+        <span className="text-xs text-gray-400 flex justify-between"><span>최종 수정일 : {`${data.modifiedDate.substring(
+          0,
+          4
+        )}년 ${data.modifiedDate.substring(
+          5,
+          7
+        )}월 ${data.modifiedDate.substring(8, 10)}일`}</span><span>{data.hits} 명이 읽은 이슈</span></span>
       </div>
     </>
   );
