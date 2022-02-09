@@ -1,9 +1,4 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/modules";
-
-const IssueDetail = ({ detail }: any) => {
-    const { user } = useSelector((state: RootState) => state.user.user);
-    const isSameUser = user.userId == detail.developer.userId;
+const IssueDetail = ({ detail, isSameUser, onIssueList }: any) => {
     const button = isSameUser ? <>
         <div className="w-full flex justify-end mt-2">
             <button className="mr-2 bg-custeal-base hover:bg-custeal-light px-3 py-1 rounded-md text-white">수정</button>
@@ -37,10 +32,11 @@ const IssueDetail = ({ detail }: any) => {
                 </svg>
             </button>
         </div>;
-        
-    return <div className="w-full flex flex-col items-center mt-8">
+
+    return <div className="w-full flex flex-col items-center mt-4">
         <div className=" md:w-1/2 w-full">
-            <h1 className="text-5xl">{detail.title}</h1>
+            <h1 onClick={onIssueList} className="text-lg font-bold hover:text-cusblue-dark cursor-pointer">← 뒤로 가기</h1>
+            <h1 className="text-5xl mt-4">{detail.title}</h1>
             <h4 className="mt-4 text-gray-500">
                 {detail.developer.name}
             </h4>
@@ -51,7 +47,13 @@ const IssueDetail = ({ detail }: any) => {
                 )}월 ${detail.modifiedDate.substring(8, 10)}일`}
             </h5>
             <hr className="mt-4" />
-            <hr className="mt-40" />
+            <div className="ql-container ql-snow ql-container-none">
+                <div
+                    className="ql-editor  ql-editor-none"
+                    dangerouslySetInnerHTML={{ __html: String(detail.content) }}
+                ></div>
+            </div>
+            <hr className="mt-4" />
             <h1 className="text-2xl mt-4 cursor-pointer">{detail.developer.name}</h1>
             <h4 className="mt-1">
                 {detail.developer.introduction}
