@@ -1,3 +1,4 @@
+import CardContainer from "../../containers/list/CardContainer";
 import Card from "./Card";
 
 const List = ({ list }: any) => {
@@ -5,7 +6,7 @@ const List = ({ list }: any) => {
     <>
       <div className="w-full flex flex-col items-center mt-4">
         {list.map((v: any, index: any) => {
-          return <Card key={index} data={v} index={v.id} />
+          return <CardContainer key={index} data={v} index={v.id} />
         })}
       </div>
     </>

@@ -8,6 +8,7 @@ import {
   setSignReAsync,
   setUpdateUserAsync,
 } from "./actions";
+import Router from "next/router";
 
 export function setSignInThunk(params: {
   username: string;
@@ -19,7 +20,9 @@ export function setSignInThunk(params: {
     try {
       const data = await SignIn(params);
       dispatch(success(data));
+      Router.push('/')
     } catch (e: any) {
+      alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
       dispatch(failure(e));
     }
   };

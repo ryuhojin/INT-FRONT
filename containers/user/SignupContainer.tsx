@@ -68,7 +68,6 @@ const SignupContainer = () => {
     if(response.status === 200){
         Router.push('/user')
     }
-    console.log(response)
   };
   return (
     <Signup

@@ -18,7 +18,6 @@ const ListContainer = () => {
   }
 
   const setFormatData = (list: any[]) => {
-    console.log(list)
     return list.map((v: any) => {
       return {
         id: v.id,

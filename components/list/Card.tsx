@@ -1,11 +1,11 @@
-const Card = ({ data }: any) => {
+const Card = ({ data, onDetail }: any) => {
   const solution = "border-l-orange-300 "
   const solved = "border-l-cusblue-base "
   const stateBorder = data.adoptYn ? solved : data.solutionCount !== 0 ? solution : "";
 
   return (
     <>
-      <div className={stateBorder + "flex flex-col w-full md:w-1/2 mb-2 px-6 py-4 bg-white shadow-cusblue-light border border-l-4 rounded-xl cursor-pointer"}>
+      <div onClick={onDetail} className={stateBorder + "flex flex-col w-full md:w-1/2 mb-2 px-6 py-4 bg-white hover:border-cusbronze-dark border border-l-4 rounded-xl cursor-pointer"}>
         <span className="text-md font-bold line-clamp-1">{data.title} </span>
         <span className="text-sm line-clamp-1 mt-2">{data.content}</span>
         <hr className="mt-2" />
