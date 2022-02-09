@@ -8,6 +8,18 @@
 > State Management : Redux + Redux Thunk <br/>
 > Tools : LightHouse
 
+### Using Library
+
+> Quill Editor <br/>
+> HighlightJS <br/>
+> Infinite Scroll <br/>
+
+### LIGHT HOUSE SCORE
+
+> mobile+LowLevel : 50
+> mobile=MidLevel : 80
+> pc : 95
+
 ### Getting Started
 
 RUN DEV : run the development server:
