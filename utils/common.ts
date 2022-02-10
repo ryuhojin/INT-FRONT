@@ -16,6 +16,24 @@ export const delCookie = (name: string) => {
         name + "= " + "; expires=" + date.toUTCString() + "; path=/";
 };
 
+export const convert12H = (value: string | String) => {
+    var time = value;
+    var getTime = time.substring(0, 2);
+    var intTime = parseInt(getTime);
+    if (intTime < 12) {
+        var str = "오전 ";
+    } else {
+        var str = "오후 ";
+    }
+    if (intTime == 12) {
+        var cvHour = intTime;
+    } else {
+        var cvHour = intTime % 12;
+    }
+    var res = str + ("0" + cvHour).slice(-2) + time.slice(-3);
+    return res;
+};
+
 export const noData = [{
     id: 0,
     title: "로딩중",
@@ -28,7 +46,7 @@ export const noData = [{
     solutionCount: 0,
     hashtags: [],
     adobtYN: false
-},{
+}, {
     id: 1,
     title: "로딩중",
     content: "로딩중",
@@ -40,7 +58,7 @@ export const noData = [{
     solutionCount: 0,
     hashtags: [],
     adobtYN: false
-},{
+}, {
     id: 2,
     title: "로딩중",
     content: "로딩중",

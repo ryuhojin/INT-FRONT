@@ -30,7 +30,7 @@ const ListContainer = () => {
         modifiedDate: v.modifiedDate,
         solutionCount: v.solutionCount,
         hashtags: v.hashtags,
-        adobtYN: v.adobtYN
+        adoptYn: v.adoptYn
       };
     });
   };

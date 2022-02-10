@@ -1,5 +1,4 @@
 import CardContainer from "../../containers/list/CardContainer";
-import Card from "./Card";
 
 const List = ({ list }: any) => {
   return (

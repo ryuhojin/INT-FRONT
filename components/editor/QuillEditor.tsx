@@ -8,7 +8,7 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const QuillEditor = (props: any) => {
     hljs.configure({
-        languages: ["javascript", "java", "ruby", "python", "rust"],
+        languages: ["javascript", "java", "python"],
     });
     const modules = useMemo(() => {
         return {
