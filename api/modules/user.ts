@@ -19,10 +19,10 @@ export async function SignRe() {
     return data;
 }
 export async function getUserInfo(userId: string) {
-    const { data } = await service.get(`developer/${userId}`)
+    return await service.get(`developer/${userId}`)
 }
 export async function updateUserInfo(params: { userId: string, name: string, email: string, gitUrl: string, webSiteUrl: string }) {
-    const {data} = await service.put('developer', params);
+    const { data } = await service.put('developer', params);
     return data;
 }
 export async function deleteUser(userId: string) {
