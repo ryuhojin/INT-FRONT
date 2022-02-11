@@ -42,6 +42,7 @@ export function setSignReThunk(): ThunkAction<
       const data = await SignRe();
       dispatch(success(data));
     } catch (e: any) {
+      alert("토큰이 만료되어 재로그인이 필요합니다.")
       delCookie('access-token')
       dispatch(setSignOutAsync());
       Router.push('/user')
