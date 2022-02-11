@@ -1,7 +1,7 @@
-const IssueDetail = ({ detail, isSameUser, onIssueList }: any) => {
+const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue }: any) => {
     const button = isSameUser ? <>
         <button className="mr-2 ">수정</button>
-        <button className="text-red-600">삭제</button></> :
+        <button className="text-red-600" onClick={() => { delIssue(detail.id) }}>삭제</button></> :
         <></>;
     return <div className="w-full flex flex-col items-center mt-4">
         <div className=" md:w-1/2 w-full">
@@ -21,7 +21,15 @@ const IssueDetail = ({ detail, isSameUser, onIssueList }: any) => {
                     {button}
                 </span>
             </div>
-            <hr className="mt-4" />
+            {detail.hashtags.length ? <>
+                <div className="mt-2 break-words">
+                    {detail.hashtags.map((v: any, index: number) => {
+                        return <span key={index} className="mr-1 text-xs border px-1 rounded-md text-white bg-cusblue-dark cursor-pointer hover:bg-cusblue-light">{`#${v}`}</span>
+                    })}
+                </div>
+                <hr className="mt-2" /></>
+                : <hr className="mt-4" />}
+
             <div className="ql-container ql-snow ql-container-none">
                 <div
                     className="ql-editor  ql-editor-none"

@@ -8,8 +8,9 @@ import { useEffect } from "react";
 import { noData } from '../../utils/common'
 const ListContainer = () => {
   const { search } = useSelector((state: RootState) => state.search);
-  const { list, pageable, loading, error } = useSelector((state: RootState) => state.search.searchList);
   const dispatch = useDispatch();
+  const { list, pageable, loading, error } = useSelector((state: RootState) => state.search.searchList);
+
 
   const onSearchList = async (e: any) => {
     e.preventDefault();

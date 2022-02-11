@@ -1,7 +1,10 @@
 import service from '../index'
 
-export async function selectSolution(id: number) {
+export async function selectSolutionList(id: number) {
     return await service.get(`solution/list/${id}`)
+}
+export async function selectSolution(id: number) {
+    return await service.get(`solution/${id}`)
 }
 export async function createSolution(params: { issueId: number, content: string, docType: string }) {
     return await service.post('solution', params)

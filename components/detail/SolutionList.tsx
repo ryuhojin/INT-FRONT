@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/modules";
 import QuillEditor from "../editor/QuillEditor";
 import Solution from "./Solution";
-const SolutionList = ({ content, onEditorChange, solutions, getSolution, isSameUser, addSolution, delSolution, adtSolution, updSolution, recSolution }: any) => {
+const SolutionList = ({ content, onEditorChange, solutions, getSolution, getSolutionById, isSameUser, addSolution, delSolution, adtSolution, updSolution, recSolution }: any) => {
     const { user } = useSelector((state: RootState) => state.user.user)
     const addSolutionBtn = Object.keys(user).length !== 0 ? <>
         <QuillEditor value={content} onChange={onEditorChange} height={"200px"} />
@@ -18,7 +18,7 @@ const SolutionList = ({ content, onEditorChange, solutions, getSolution, isSameU
                     <h5 className="my-3 text-lg">총 {solutions.length}개의 솔루션</h5>
                     {
                         solutions.map((v: any) => {
-                            return <Solution key={v.id} getSolution={getSolution} index={v.id} data={v} isSameUser={isSameUser} updSolution={updSolution} adtSolution={adtSolution} delSolution={delSolution} recSolution={recSolution} />
+                            return <Solution key={v.id} getSolution={getSolution} getSolutionById={getSolutionById} index={v.id} data={v} isSameUser={isSameUser} updSolution={updSolution} adtSolution={adtSolution} delSolution={delSolution} recSolution={recSolution} />
                         })
                     }
                 </div>

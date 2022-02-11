@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getIssue } from "../../api/modules/issue";
+import { selectIssue } from "../../api/modules/issue";
 import Seo from "../../components/common/Seo";
 import HeaderContainer from "../../containers/base/HeaderContainer";
 import DetailContainer from "../../containers/detail/DetailContainer";
@@ -17,7 +17,7 @@ export default Detail;
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     const id = Number(query.id);
-    const { data } = await getIssue(id);
+    const { data } = await selectIssue(id);
     return {
         props: {
             detail: data,

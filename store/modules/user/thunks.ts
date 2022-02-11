@@ -20,7 +20,7 @@ export function setSignInThunk(params: {
     try {
       const data = await SignIn(params);
       dispatch(success(data));
-      Router.push('/')
+      Router.back();
     } catch (e: any) {
       alert("아이디 혹은 비밀번호가 일치하지 않습니다.")
       dispatch(failure(e));

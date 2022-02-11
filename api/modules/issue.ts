@@ -28,10 +28,10 @@ export async function getIssueList<responseIssueListInterface>(params: { page: n
         }
     }
 }
-export async function getIssue(id: number) {
+export async function selectIssue(id: number) {
     return await service.get(`issue/${id}`)
 }
-export async function setIssue(params: { title: string, content: string, docType: string, hashtags: [] }) {
+export async function createIssue(params: { title: string, content: string, docType: string, hashtags: [] }) {
     return await service.post('issue', params)
 }
 export async function updateIssue(params: { id: number, title: string, content: string, docType: string, hashtags: [] }) {

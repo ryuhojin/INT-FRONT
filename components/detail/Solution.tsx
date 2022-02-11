@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import CommentContainer from '../../containers/detail/CommentContainer';
 import { RootState } from '../../store/modules';
@@ -12,14 +12,16 @@ const Solution = ({ isSameUser, data, getSolution, delSolution, adtSolution, rec
     const [content, setContent] = useState(String(data.content));
     const [editState, setEditState] = useState(false);
     const [commentState, setCommentState] = useState(false);
+    useEffect(()=>{
 
+    },[data])
     const isSolUser = user.userId == data.developer.userId;
 
     /** DYNAMIC UI START */
     const setSolBtn = isSameUser && !editState ? data.adoptYn ? <button className="w-full text-center text-white mt-2 bg-gray-400 py-1 rounded-md" >체택됨</button> : <button onClick={() => { adtSolution(data.id) }} className="w-full text-center text-white mt-2 bg-cusblue-base hover:bg-cusblue-light py-1 rounded-md" >체택</button> : <></>
     const setUpdDelBtn = isSolUser ? !editState ? <>
         <div className="w-full flex justify-center text-xs mt-2 text-cussand-dark">
-            <button onClick={() => { setEditState(!editState) }}>수정</button>&nbsp;/&nbsp;<button onClick={() => { console.log(data); delSolution(data.id) }}>삭제</button>
+            <button onClick={() => { setEditState(!editState) }}>수정</button>&nbsp;/&nbsp;<button onClick={() => { delSolution(data.id) }}>삭제</button>
         </div>
     </> : <></>
         :
@@ -52,7 +54,7 @@ const Solution = ({ isSameUser, data, getSolution, delSolution, adtSolution, rec
     /** DYNAMIC UI END */
 
     return <div className={adobtDiv + "border my-2 rounded-xl p-3 bg-white"}>
-        <p className='text-right text-xs text-gray-400'><span className='text-orange-400'>0 </span>개의 추천 <span className='text-cusblue-base cursor-pointer' onClick={() => { recSolution(data.id) }}>&nbsp;&nbsp;추천하기</span></p>
+        <p className='text-right text-xs text-gray-400'><span className='text-orange-400'>{data.recommendationCount} </span>개의 추천 <span className='text-cusblue-base cursor-pointer' onClick={() => { recSolution(data.id) }}>&nbsp;&nbsp;추천하기</span></p>
         {contentDiv}
         <hr className="mt-2" />
         {setSolBtn}
