@@ -70,4 +70,28 @@ export const noData = [{
     solutionCount: 0,
     hashtags: [],
     adobtYN: false
+}, {
+    id: 3,
+    title: "로딩중",
+    content: "로딩중",
+    docType: "",
+    hits: 0,
+    recommendationCount: 0,
+    developer: "ISNOTWORKING",
+    modifiedDate: "0000-00-00T00:00:00",
+    solutionCount: 0,
+    hashtags: [],
+    adobtYN: false
+}, {
+    id: 4,
+    title: "로딩중",
+    content: "로딩중",
+    docType: "",
+    hits: 0,
+    recommendationCount: 0,
+    developer: "ISNOTWORKING",
+    modifiedDate: "0000-00-00T00:00:00",
+    solutionCount: 0,
+    hashtags: [],
+    adobtYN: false
 }]

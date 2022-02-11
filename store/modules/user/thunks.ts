@@ -9,6 +9,7 @@ import {
   setUpdateUserAsync,
 } from "./actions";
 import Router from "next/router";
+import { delCookie } from "../../../utils/common";
 
 export function setSignInThunk(params: {
   username: string;
@@ -41,7 +42,9 @@ export function setSignReThunk(): ThunkAction<
       const data = await SignRe();
       dispatch(success(data));
     } catch (e: any) {
-      dispatch(failure(e));
+      delCookie('access-token')
+      dispatch(setSignOutAsync());
+      Router.push('/user')
     }
   };
 }
