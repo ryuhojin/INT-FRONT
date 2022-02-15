@@ -34,3 +34,6 @@ export async function checkUserId(userId: string) {
 export async function checkName(name: string) {
     return await service.get(`developer/checkName/${name}`)
 }
+export async function followUser(userId: string) {
+    return await service.put(`developer/follow/${userId}`)
+}

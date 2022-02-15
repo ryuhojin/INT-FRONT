@@ -1,8 +1,8 @@
 import Router from "next/router";
 
-const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue }: any) => {
+const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue, updIssue, followUser }: any) => {
     const button = isSameUser ? <>
-        <button className="mr-2 ">수정</button>
+        <button className="mr-2 " onClick={() => { updIssue(detail) }}>수정</button>
         <button className="text-red-600" onClick={() => { delIssue(detail.id) }}>삭제</button></> :
         <></>;
     return <div className="w-full flex flex-col items-center mt-4">
@@ -43,7 +43,7 @@ const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue }: any) => {
                 <span className="text-2xl cursor-pointer" onClick={() => { Router.push({ pathname: `/user/${detail.developer.name}` }); }}>
                     {detail.developer.name}
                 </span>
-                <button className="flex px-2 py-1 border rounded-md border-gray-500">
+                <button className="flex px-2 py-1 border rounded-md border-gray-500" onClick={() => { followUser(detail.developer.userId) }}>
                     좋아요&nbsp;<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>

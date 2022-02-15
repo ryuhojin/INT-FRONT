@@ -10,6 +10,8 @@ import "react-quill/dist/quill.snow.css";
 import { deleteSolution, selectSolutionList, createSolution, updateSolution, adobtSolution, recommendSolution, selectSolution } from "../../api/modules/solution";
 import { deleteIssue } from "../../api/modules/issue";
 import { getSearchListThunk } from "../../store/modules/search";
+import { followUser } from "../../api/modules/user";
+import { isFulfilled } from "@reduxjs/toolkit";
 
 const DetailContainer = ({ detail }: any) => {
     const [content, setContent] = useState("");
@@ -30,6 +32,7 @@ const DetailContainer = ({ detail }: any) => {
         }
     }
     const recSolution = async (id: number) => {
+        if(Object.keys(user).length == 0 ) return;
         const response = await recommendSolution(id);
         if (response.status === 200) {
             getSolutionById(id);
@@ -78,15 +81,26 @@ const DetailContainer = ({ detail }: any) => {
         }
     }
 
+    const updIssue = (detail: any) => {
+        Router.push({ pathname: '/issue/update', query: detail })
+    }
+
     const onIssueList = () => {
         Router.push('/issue')
     }
     const onEditorChange = (value: string) => {
         setContent(value);
     };
+    const folUser = async (userId: string) => {
+        if(Object.keys(user).length == 0 ) return;
+        const response = await followUser(userId);
+        if (response.status === 200) {
+            console.log('팔로우 완료')
+        }
+    }
 
     return <>
-        <IssueDetail onIssueList={onIssueList} delIssue={delIssue} detail={detail} isSameUser={isSameUser} />
+        <IssueDetail onIssueList={onIssueList} updIssue={updIssue} delIssue={delIssue} detail={detail} isSameUser={isSameUser} followUser={folUser} />
         <SolutionList solutions={solutionList} getSolution={getSolution} getSolutionById={getSolutionById} isSameUser={isSameUser} content={content} onEditorChange={onEditorChange} addSolution={addSolution} recSolution={recSolution} updSolution={updSolution} delSolution={delSolution} adtSolution={adtSolution} />
     </>
 }
