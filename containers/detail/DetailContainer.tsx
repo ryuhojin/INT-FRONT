@@ -12,7 +12,7 @@ import { deleteIssue } from "../../api/modules/issue";
 import { getSearchListThunk } from "../../store/modules/search";
 import { followUser } from "../../api/modules/user";
 import { useRecoilValue } from "recoil";
-import { authAtom } from "../../utils/auth";
+import { authAtom } from "../../store/atom";
 
 const DetailContainer = ({ detail }: any) => {
     const [content, setContent] = useState("");

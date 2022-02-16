@@ -7,7 +7,7 @@ import { ReactQueryProvider } from '../utils/react-query';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <ReactQueryProvider pageProps={pageProps}>
+    <ReactQueryProvider>
       <RecoilRoot>
         <Component {...pageProps} />
       </RecoilRoot>

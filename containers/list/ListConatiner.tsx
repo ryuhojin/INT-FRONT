@@ -1,22 +1,41 @@
-import List from "../../components/list/List";
 import SearchBox from "../../components/list/SearchBox";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/modules";
-import { getSearchListThunk, getSearchScrollThunk, setSearchAsync } from "../../store/modules/search";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useEffect } from "react";
-import { noData } from '../../utils/common'
+import { useRef } from "react";
+import { useInfiniteQuery } from "react-query";
+import { getIssues } from "../../api/modules/issue";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import React from "react";
+import { searchAtom } from "../../store/atom";
+import { useRecoilState } from "recoil";
+import { useDebounce } from "../../hooks/useDebounce";
+
 const ListContainer = () => {
-  const { search } = useSelector((state: RootState) => state.search);
-  const dispatch = useDispatch();
-  const { list, pageable, loading, error } = useSelector((state: RootState) => state.search.searchList);
+  const [search, setSearch] = useRecoilState(searchAtom);
+  const {
+    status,
+    data,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    ['issuelist', useDebounce(search, 1000)],
+    async ({ pageParam = { query: search, page: 0 } }) => {
+      return await getIssues({ query: pageParam.query, page: pageParam.page })
+    },
+    {
+      getNextPageParam: lastPage => {
+        return lastPage.nextId ? { query: search, page: lastPage.nextId } : false
+      },
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  )
 
+  const hasMoreChecker = useRef(null);
 
-  const onSearchList = async (e: any) => {
-    e.preventDefault();
-    if (e.key !== "Enter") return;
-    await dispatch(getSearchListThunk(search))
-  }
+  useIntersectionObserver({
+    target: hasMoreChecker,
+    onIntersect: fetchNextPage,
+    enabled: !!hasNextPage,
+  })
 
   const setFormatData = (list: any[]) => {
     return list.map((v: any) => {
@@ -36,27 +55,30 @@ const ListContainer = () => {
     });
   };
 
-  useEffect(() => {
-    if (list.length != 0) return;
-    dispatch(getSearchListThunk(search))
-  }, [])
-
-  const fetch = () => {
-    dispatch(getSearchScrollThunk(pageable.page, pageable.query))
-  }
-
-  return (
-    <>
-      <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); dispatch(setSearchAsync(e.target.value)) }} setEnter={onSearchList} />
-      <InfiniteScroll
-        dataLength={list.length}
-        next={fetch}
-        hasMore={pageable.hasMore}
-        loader={<List list={noData} />}
-      >
-        <List list={setFormatData(list)} />
-      </InfiniteScroll>
-    </>
-  );
+  return <>
+    <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} />
+    {
+      status === "loading" ?
+        <p>로딩중..</p> :
+        status === "error" ?
+          <p>에러..</p> :
+          <>
+            {
+              data?.pages.map((value: any, index: any) => {
+                return <React.Fragment key={index}>
+                  {value.data.map((value: any, index: any) => {
+                    return <p style={{
+                      border: '1px solid gray',
+                      borderRadius: '5px',
+                      padding: '2rem 1rem',
+                    }} key={index}>{value.title}{value.content.replace(/(<([^>]+)>)/gi, "")}</p>
+                  })}
+                </React.Fragment>
+              })
+            }
+            <div ref={hasMoreChecker}></div>
+          </>
+    }
+  </>
 };
 export default ListContainer;

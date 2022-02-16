@@ -1,12 +1,8 @@
 import { refresh, login, register, deleteUser, updateUser } from "../api/modules/user";
 import { cookie, getCookie } from "./common";
 import service from "../api";
-import { useRecoilState, atom } from 'recoil';
-
-export const authAtom = atom({
-    key: 'auth',
-    default: null,
-});
+import { useRecoilState } from 'recoil';
+import { authAtom } from "../store/atom";
 
 export function useAuth() {
     const [auth, setAuth] = useRecoilState(authAtom);

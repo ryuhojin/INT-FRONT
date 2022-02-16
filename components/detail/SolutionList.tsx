@@ -1,5 +1,6 @@
 import { useRecoilValue } from "recoil";
-import { authAtom } from "../../utils/auth";
+import { authAtom } from "../../store/atom";
+
 import QuillEditor from "../editor/QuillEditor";
 import Solution from "./Solution";
 const SolutionList = ({ content, onEditorChange, solutions, getSolution, getSolutionById, isSameUser, addSolution, delSolution, adtSolution, updSolution, recSolution }: any) => {

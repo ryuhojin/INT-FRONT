@@ -40,3 +40,11 @@ export async function updateIssue(params: { id: number, title: string, content: 
 export async function deleteIssue(id: number) {
     return await service.delete(`issue/${id}`)
 }
+
+export async function getIssues(params: { query?: string, page: number }) {
+    const queryUrl = `&query=${params.query}`
+    const response = await service.get(`issue/list/latest?page=${params.page}&size=20${params.query ? queryUrl : ''}`);
+    const data = response.data.content;
+    const nextId = response.data.totalPages-1 > response.data.number ? response.data.number + 1 : null;
+    return { data, nextId }
+}

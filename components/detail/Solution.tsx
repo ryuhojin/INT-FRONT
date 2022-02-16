@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil';
 import CommentContainer from '../../containers/detail/CommentContainer';
-import { authAtom } from '../../utils/auth';
 import { convert12H } from '../../utils/common'
 import QuillEditor from '../editor/QuillEditor';
-
+import { authAtom } from "../../store/atom";
 const Solution = ({ isSameUser, data, getSolution, delSolution, adtSolution, recSolution, updSolution }: any) => {
 
     const user: any = useRecoilValue(authAtom);

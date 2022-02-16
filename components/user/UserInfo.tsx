@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { authAtom } from "../../utils/auth";
+import { authAtom } from "../../store/atom";
 
 const UserInfo = ({
   paramsUser,

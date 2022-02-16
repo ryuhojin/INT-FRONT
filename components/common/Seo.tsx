@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
-import { authAtom, useAuth } from "../../utils/auth";
+import { authAtom } from "../../store/atom";
+import { useAuth } from "../../utils/auth";
 
 const Seo = ({ title, contents }: { title: string, contents?: string }) => {
     const user = useRecoilValue(authAtom);

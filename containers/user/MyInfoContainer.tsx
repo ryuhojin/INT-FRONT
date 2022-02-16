@@ -2,7 +2,8 @@ import { useState } from "react";
 import { checkName } from "../../api/modules/user";
 import UserInfo from "../../components/user/UserInfo";
 import { useRecoilValue } from "recoil";
-import { authAtom, useAuth } from "../../utils/auth";
+import {  useAuth } from "../../utils/auth";
+import { authAtom } from "../../store/atom";
 import Router from "next/router";
 import { useEffect } from "react";
 const MyInfoContainer = () => {
