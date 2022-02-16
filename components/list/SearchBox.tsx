@@ -1,4 +1,4 @@
-const SearchBox = ({ search, setSearch, setEnter }: any) => {
+const SearchBox = ({ search, setSearch, setEnter, placeholder }: any) => {
   return (
     <div className="flex w-full justify-center mt-8">
       <div className="flex items-center md:w-1/2 w-full h-14 rounded-full border-2 px-10  bg-white hover:border-cusblue-base text-cusblue-base">
@@ -16,7 +16,7 @@ const SearchBox = ({ search, setSearch, setEnter }: any) => {
         <input
           type="text"
           className="ml-3 h-full w-full focus:outline-none"
-          placeholder="검색어를 입력 후 Enter를 눌러주세요.."
+          placeholder={placeholder}
           value={search} onChange={setSearch} onKeyUp={setEnter}
         />
       </div>
