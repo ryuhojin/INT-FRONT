@@ -11,6 +11,6 @@ const MainContainer = () => {
         Router.push('/issue')
     }
 
-    return <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} setEnter={onSearchList} />
+    return <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} setEnter={onSearchList} placeholder={"검색어를 입력 후 Enter를 눌러주세요.."} />
 }
 export default MainContainer

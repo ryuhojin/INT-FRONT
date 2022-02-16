@@ -56,7 +56,7 @@ const ListContainer = () => {
   };
 
   return <>
-    <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} />
+    <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} placeholder={"검색어를 입력 해주세요.."} />
     {
       status === "loading" ?
         <p>로딩중..</p> :
