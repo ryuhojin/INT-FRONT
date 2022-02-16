@@ -1,20 +1,16 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import service from "../../api";
-import { RootState } from "../../store/modules";
-import { setSignReThunk } from "../../store/modules/user";
-import { getCookie } from "../../utils/common";
+import { useRecoilValue } from "recoil";
+import { authAtom, useAuth } from "../../utils/auth";
 
 const Seo = ({ title, contents }: { title: string, contents?: string }) => {
-    const { user } = useSelector((state: RootState) => state.user.user)
-    const dispatch = useDispatch();
-
+    const user = useRecoilValue(authAtom);
+    const auth = useAuth();
     useEffect(() => {
-        if (Object.keys(user).length != 0 || !getCookie('access-token')) return;
-        service.defaults.headers.common['access-token'] = getCookie('access-token') || '';
-        dispatch(setSignReThunk());
-    }, [])
+        if (user === null) {
+            auth.signre();
+        }
+    })
 
     return <Head>
         <meta httpEquiv="x-ua-compatible" content="IE=edge" />

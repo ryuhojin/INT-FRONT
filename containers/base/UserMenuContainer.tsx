@@ -1,11 +1,7 @@
 import Router from "next/router";
-import { useSelector } from "react-redux";
 import UserMenu from "../../components/base/UserMenu";
-import { RootState } from "../../store/modules";
 
-const UserMenuContainer = ({ toggleTab }: any) => {
-    const { user } = useSelector((state: RootState) => state.user.user)
-
+const UserMenuContainer = ({ toggleTab, user }: any) => {
     const onGetIssueList = () => Router.push('/issue')
     const onSetIssue = () => Router.push('/issue/write')
     const onSignin = () => { Router.push('/user') }

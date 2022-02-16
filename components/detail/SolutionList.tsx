@@ -1,9 +1,9 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/modules";
+import { useRecoilValue } from "recoil";
+import { authAtom } from "../../utils/auth";
 import QuillEditor from "../editor/QuillEditor";
 import Solution from "./Solution";
 const SolutionList = ({ content, onEditorChange, solutions, getSolution, getSolutionById, isSameUser, addSolution, delSolution, adtSolution, updSolution, recSolution }: any) => {
-    const { user } = useSelector((state: RootState) => state.user.user)
+    const user: any = useRecoilValue(authAtom);
     const addSolutionBtn = Object.keys(user).length !== 0 ? <>
         <QuillEditor value={content} onChange={onEditorChange} height={"200px"} />
         <div className="mt-2 w-full flex justify-end">

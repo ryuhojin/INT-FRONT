@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useRecoilValue } from 'recoil';
 import CommentContainer from '../../containers/detail/CommentContainer';
-import { RootState } from '../../store/modules';
+import { authAtom } from '../../utils/auth';
 import { convert12H } from '../../utils/common'
 import QuillEditor from '../editor/QuillEditor';
 
 const Solution = ({ isSameUser, data, getSolution, delSolution, adtSolution, recSolution, updSolution }: any) => {
 
-    const { user } = useSelector((state: RootState) => state.user.user);
+    const user: any = useRecoilValue(authAtom);
 
     const [content, setContent] = useState(String(data.content));
     const [editState, setEditState] = useState(false);

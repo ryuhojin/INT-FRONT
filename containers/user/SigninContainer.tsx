@@ -1,20 +1,18 @@
 import Router from "next/router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import SignIn from "../../components/user/SignIn";
-import { setSignInThunk } from "../../store/modules/user";
+import { useAuth } from "../../utils/auth";
 
 const SigninContainer = () => {
-    const dispatch = useDispatch();
+    const auth = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const onSignin = async (e: any) => {
         e.preventDefault();
-        await dispatch(setSignInThunk({ username: username, password: password }));
+        await auth.signin({ username: username, password: password });
+        Router.back();
     };
-
-    return <SignIn
+    return <><SignIn
         username={username}
         password={password}
         setUsername={(e: any) => {
@@ -26,6 +24,6 @@ const SigninContainer = () => {
             setPassword(e.target.value);
         }}
         onSignup={() => { Router.push('/user/signup') }}
-        onSubmit={onSignin} />
+        onSubmit={onSignin} /></>
 }
 export default SigninContainer;

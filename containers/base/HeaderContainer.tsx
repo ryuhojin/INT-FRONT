@@ -2,12 +2,12 @@ import Router from "next/router";
 import Header from "../../components/base/Header";
 import UserMenuContainer from "./UserMenuContainer";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setSignOutThunk } from "../../store/modules/user";
-import { delCookie } from "../../utils/common";
+import { authAtom, useAuth } from "../../utils/auth";
+import { useRecoilValue } from "recoil";
 
 const HeaderContainer = () => {
-    const dispatch = useDispatch();
+    const user = useRecoilValue(authAtom);
+    const auth = useAuth();
 
     const [tab, setTab] = useState(false);
     const toggleTab = () => setTab(!tab);
@@ -15,12 +15,11 @@ const HeaderContainer = () => {
     const onHome = () => Router.push('/')
     const onGetUserInfo = () => Router.push('/user/info')
     const onSignout = async () => {
-        await dispatch(setSignOutThunk())
-        await delCookie('access-token')
         setTab(!tab);
+        auth.signout();
         Router.push('/')
     }
 
-    return <Header userMenu={<UserMenuContainer toggleTab={toggleTab} />} onHome={onHome} onGetUserInfo={onGetUserInfo} onSignout={onSignout} tabState={tab} />;
+    return <Header userMenu={<UserMenuContainer toggleTab={toggleTab} user={user} />} onHome={onHome} onGetUserInfo={onGetUserInfo} onSignout={onSignout} tabState={tab} />;
 }
 export default HeaderContainer;

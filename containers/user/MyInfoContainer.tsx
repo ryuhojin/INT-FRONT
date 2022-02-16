@@ -1,15 +1,13 @@
-import { EventHandler, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { checkName, deleteUser, updateUserInfo } from "../../api/modules/user";
+import { useState } from "react";
+import { checkName } from "../../api/modules/user";
 import UserInfo from "../../components/user/UserInfo";
-import { RootState } from "../../store/modules";
+import { useRecoilValue } from "recoil";
+import { authAtom, useAuth } from "../../utils/auth";
 import Router from "next/router";
-import { delCookie } from "../../utils/common";
-import { setSignOutThunk, setUpdateUserThunk } from "../../store/modules/user";
 import { useEffect } from "react";
 const MyInfoContainer = () => {
-  const { user } = useSelector((state: RootState) => state.user.user);
-  const dispatch = useDispatch();
+  const user: any = useRecoilValue(authAtom);
+  const auth = useAuth();
   const [userEdit, setUserEdit] = useState(user);
   const [inputState, setInputState] = useState(false);
 
@@ -47,18 +45,15 @@ const MyInfoContainer = () => {
   const updateAccount = async () => {
     const { data } = await checkName(userEdit.name);
     if (data.adobtYN) return;
-    await dispatch(setUpdateUserThunk(userEdit));
+    await auth.uptuser(userEdit);
     toggleState();
   };
 
   const deleteAccount = async () => {
-    const response = await deleteUser(user.userId);
-    if (response.status === 200) {
-      await dispatch(setSignOutThunk());
-      await delCookie("access-token");
-      Router.push("/");
-    }
+    await auth.deluser(user.userId);
+    Router.push("/");
   };
+  if (userEdit === null) return <></>
   return (
     <UserInfo
       paramsUser={userEdit}

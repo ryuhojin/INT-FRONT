@@ -11,12 +11,13 @@ import { deleteSolution, selectSolutionList, createSolution, updateSolution, ado
 import { deleteIssue } from "../../api/modules/issue";
 import { getSearchListThunk } from "../../store/modules/search";
 import { followUser } from "../../api/modules/user";
-import { isFulfilled } from "@reduxjs/toolkit";
+import { useRecoilValue } from "recoil";
+import { authAtom } from "../../utils/auth";
 
 const DetailContainer = ({ detail }: any) => {
     const [content, setContent] = useState("");
     const [solutionList, setSolutionList] = useState<any>(detail.solutions);
-    const { user } = useSelector((state: RootState) => state.user.user);
+    const user: any = useRecoilValue(authAtom);
     const { search } = useSelector((state: RootState) => state.search);
     const dispatch = useDispatch();
     const isSameUser = user.userId == detail.developer.userId;

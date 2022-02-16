@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/modules";
+import { useRecoilValue } from "recoil";
+import { authAtom } from "../../utils/auth";
 
 const UserInfo = ({
   paramsUser,
@@ -9,8 +9,7 @@ const UserInfo = ({
   updateAccount,
   onChangeUserData,
 }: any) => {
-  const { user } = useSelector((state: RootState) => state.user.user);
-
+  const user: any = useRecoilValue(authAtom);
   const isSameUser = user.userId == paramsUser.userId;
 
   const name = inputState ? (<input
