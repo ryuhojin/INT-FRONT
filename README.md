@@ -8,8 +8,8 @@ https://int-front.vercel.app/
 > Language : TypeScript <br/>
 > Framework : NextJS <br/>
 > Style : TailwindCSS <br/>
-> State Management(~2022-02-15) : Redux + Redux Thunk <br/>
-> State Management(2022-02-16~) : Recoil + react Query(store의 사용이유가 좀 애매해지고 있다고 느낌, 단순한 리스트 조회 인데 지나치게 작업이 많음)<br/>
+> State Management(~2022-02-15) : Redux + Redux Thunk(store의 사용이유가 좀 애매해지고 있다고 느낌, 단순한 리스트 조회 인데 지나치게 작업이 많음)<br/>
+> State Management(2022-02-16~) : Recoil + react Query<br/>
 > Tools : LightHouse
 
 ### Using Library
