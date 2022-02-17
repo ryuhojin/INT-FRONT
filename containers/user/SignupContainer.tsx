@@ -1,6 +1,6 @@
 import Signup from "../../components/user/Signup";
 import { useState } from "react";
-import { checkName, checkUserId, SignUp } from "../../api/modules/user";
+import { checkName, checkUserId, register } from "../../api/modules/user";
 import Router from "next/router";
 const SignupContainer = () => {
   const [userId, setUserId] = useState("");
@@ -56,7 +56,7 @@ const SignupContainer = () => {
       alert("필수 값을 입력하세요");
       return;
     }
-    const response = await SignUp({
+    const response = await register({
       userId: userId,
       email: email,
       password: password,
@@ -66,7 +66,7 @@ const SignupContainer = () => {
       webSiteUrl: webSiteUrl,
     });
     if(response.status === 200){
-        Router.push('/user')
+        Router.back()
     }
   };
   return (

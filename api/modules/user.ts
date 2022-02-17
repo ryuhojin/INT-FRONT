@@ -1,20 +1,7 @@
 import service from '../index'
 import { UserInterface } from '../../interfaces/user'
-import { setCookie } from '../../utils/common';
 
-export async function SignUp(params: UserInterface) {
-    return await service.post("developer", params)
-}
-export async function SignIn<UserInterface>(params: { username: string, password: string }) {
-    const response = await service.post("auth/login", params);
-    if (response.headers['access-token']) {
-        service.defaults.headers.common["access-token"] =
-            response.headers["access-token"] || "";
-        setCookie("access-token", response.headers["access-token"]);
-    }
-    return response.data
-}
-//TODO :SignUP & SignIN 정리필요
+
 export async function login(params: { username: string, password: string }) {
     return await service.post("auth/login", params);
 }

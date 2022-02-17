@@ -1,22 +1,31 @@
 import SearchBox from "../../components/list/SearchBox";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { getIssues } from "../../api/modules/issue";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import React from "react";
-import { searchAtom } from "../../store/atom";
+import { searchAtom, toggleAtom } from "../../store/atom";
 import { useRecoilState } from "recoil";
 import { useDebounce } from "../../hooks/useDebounce";
+import CardContainer from "./CardContainer";
 
 const ListContainer = () => {
   const [search, setSearch] = useRecoilState(searchAtom);
+  const [toggle, setToggle] = useRecoilState(toggleAtom);
+
+  useEffect(() => {
+    if (toggle) {
+      setToggle(false);
+    }
+  })
+
   const {
     status,
     data,
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    ['issuelist', useDebounce(search, 1000)],
+    ['issuelist', useDebounce(search, 1000), toggle],
     async ({ pageParam = { query: search, page: 0 } }) => {
       return await getIssues({ query: pageParam.query, page: pageParam.page })
     },
@@ -37,47 +46,26 @@ const ListContainer = () => {
     enabled: !!hasNextPage,
   })
 
-  const setFormatData = (list: any[]) => {
-    return list.map((v: any) => {
-      return {
-        id: v.id,
-        title: v.title,
-        content: v.content.replace(/(<([^>]+)>)/gi, ""),
-        docType: v.docType,
-        hits: v.hits,
-        recommendationCount: v.recommendationCount,
-        developer: v.developer,
-        modifiedDate: v.modifiedDate,
-        solutionCount: v.solutionCount,
-        hashtags: v.hashtags,
-        adoptYn: v.adoptYn
-      };
-    });
-  };
-
   return <>
     <SearchBox search={search} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} placeholder={"검색어를 입력 해주세요.."} />
     {
       status === "loading" ?
-        <p>로딩중..</p> :
+        <p></p> :
         status === "error" ?
-          <p>에러..</p> :
-          <>
+          <p></p> :
+          <div className="mt-8">
             {
-              data?.pages.map((value: any, index: any) => {
-                return <React.Fragment key={index}>
-                  {value.data.map((value: any, index: any) => {
-                    return <p style={{
-                      border: '1px solid gray',
-                      borderRadius: '5px',
-                      padding: '2rem 1rem',
-                    }} key={index}>{value.title}{value.content.replace(/(<([^>]+)>)/gi, "")}</p>
-                  })}
-                </React.Fragment>
-              })
+              data?.pages && data?.pages[0].data.length !== 0 ?
+                data?.pages.map((value: any, index: any) => {
+                  return <React.Fragment key={index}>
+                    {value.data.map((value: any, index: any) => {
+                      return <div className="flex justify-center" key={index}><CardContainer data={value} index={value.id} /></div>
+                    })}
+                  </React.Fragment>
+                }) : <div className="flex justify-center">검색된 이슈가 없습니다.</div>
             }
             <div ref={hasMoreChecker}></div>
-          </>
+          </div>
     }
   </>
 };

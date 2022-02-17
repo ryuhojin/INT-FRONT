@@ -1,26 +1,23 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import IssueDetail from "../../components/detail/IssueDetail";
 import SolutionList from "../../components/detail/SolutionList";
-import { RootState } from "../../store/modules";
 import Router from "next/router";
 
 import "highlight.js/styles/github-dark.css";
 import "react-quill/dist/quill.snow.css";
 import { deleteSolution, selectSolutionList, createSolution, updateSolution, adobtSolution, recommendSolution, selectSolution } from "../../api/modules/solution";
 import { deleteIssue } from "../../api/modules/issue";
-import { getSearchListThunk } from "../../store/modules/search";
 import { followUser } from "../../api/modules/user";
-import { useRecoilValue } from "recoil";
-import { authAtom } from "../../store/atom";
+import { useRecoilState, useRecoilValue, } from "recoil";
+import { authAtom, toggleAtom } from "../../store/atom";
 
 const DetailContainer = ({ detail }: any) => {
     const [content, setContent] = useState("");
     const [solutionList, setSolutionList] = useState<any>(detail.solutions);
     const user: any = useRecoilValue(authAtom);
-    const { search } = useSelector((state: RootState) => state.search);
-    const dispatch = useDispatch();
-    const isSameUser = user.userId == detail.developer.userId;
+    const [toggle, setToggle] = useRecoilState(toggleAtom)
+    const isSameUser = user ? user.userId == detail.developer.userId : false;
+
     const addSolution = async () => {
         const response = await createSolution({
             issueId: Number(detail.id),
@@ -33,7 +30,7 @@ const DetailContainer = ({ detail }: any) => {
         }
     }
     const recSolution = async (id: number) => {
-        if(Object.keys(user).length == 0 ) return;
+        if (Object.keys(user).length == 0) return;
         const response = await recommendSolution(id);
         if (response.status === 200) {
             getSolutionById(id);
@@ -77,7 +74,7 @@ const DetailContainer = ({ detail }: any) => {
     const delIssue = async (id: number) => {
         const response = await deleteIssue(id);
         if (response.status === 200) {
-            dispatch(getSearchListThunk(search))
+            setToggle(true);
             Router.push('/issue')
         }
     }
@@ -93,7 +90,7 @@ const DetailContainer = ({ detail }: any) => {
         setContent(value);
     };
     const folUser = async (userId: string) => {
-        if(Object.keys(user).length == 0 ) return;
+        if (Object.keys(user).length == 0) return;
         const response = await followUser(userId);
         if (response.status === 200) {
             console.log('팔로우 완료')

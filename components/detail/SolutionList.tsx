@@ -5,7 +5,7 @@ import QuillEditor from "../editor/QuillEditor";
 import Solution from "./Solution";
 const SolutionList = ({ content, onEditorChange, solutions, getSolution, getSolutionById, isSameUser, addSolution, delSolution, adtSolution, updSolution, recSolution }: any) => {
     const user: any = useRecoilValue(authAtom);
-    const addSolutionBtn = Object.keys(user).length !== 0 ? <>
+    const addSolutionBtn = user ? <>
         <QuillEditor value={content} onChange={onEditorChange} height={"200px"} />
         <div className="mt-2 w-full flex justify-end">
             <button onClick={addSolution} className="bg-cusblue-base hover:bg-cusblue-light text-white px-3 py-2 rounded-md">솔루션 등록</button>

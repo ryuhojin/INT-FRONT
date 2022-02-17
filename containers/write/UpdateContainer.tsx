@@ -1,18 +1,16 @@
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createIssue, updateIssue } from "../../api/modules/issue";
+import { useRecoilState } from "recoil";
+import { updateIssue } from "../../api/modules/issue";
 import IssueUpdate from "../../components/write/IssueUpdate";
-import { RootState } from "../../store/modules";
-import { getSearchListThunk } from "../../store/modules/search";
+import { toggleAtom } from "../../store/atom";
 
 const UpdateContainer = () => {
     const router = useRouter()
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tag, setTag] = useState<any>([]);
-    const { search } = useSelector((state: RootState) => state.search);
-    const dispatch = useDispatch();
+    const [toggle, setToggle] = useRecoilState(toggleAtom);
     useEffect(() => {
         if (Object.keys(router.query).length == 0) return;
         setTitle(String(router.query.title))
@@ -54,7 +52,7 @@ const UpdateContainer = () => {
             hashtags: tag
         })
         if (response.status === 200) {
-            dispatch(getSearchListThunk(search))
+            setToggle(true);
             Router.push(`/issue/${router.query.id}`)
         }
     }

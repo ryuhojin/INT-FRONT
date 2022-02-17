@@ -11,10 +11,10 @@ const Solution = ({ isSameUser, data, getSolution, delSolution, adtSolution, rec
     const [content, setContent] = useState(String(data.content));
     const [editState, setEditState] = useState(false);
     const [commentState, setCommentState] = useState(false);
-    useEffect(()=>{
+    useEffect(() => {
 
-    },[data])
-    const isSolUser = user.userId == data.developer.userId;
+    }, [data])
+    const isSolUser = user ? user.userId == data.developer.userId : false;
 
     /** DYNAMIC UI START */
     const setSolBtn = isSameUser && !editState ? data.adoptYn ? <button className="w-full text-center text-white mt-2 bg-gray-400 py-1 rounded-md" >체택됨</button> : <button onClick={() => { adtSolution(data.id) }} className="w-full text-center text-white mt-2 bg-cusblue-base hover:bg-cusblue-light py-1 rounded-md" >체택</button> : <></>

@@ -1,18 +1,16 @@
 import Router from "next/router";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRecoilState } from "recoil";
 import { createIssue } from "../../api/modules/issue";
 import IssueWrite from "../../components/write/IssueWrite";
-import { RootState } from "../../store/modules";
-import { getSearchListThunk } from "../../store/modules/search";
+import { toggleAtom } from "../../store/atom";
 
 const WriteContainer = () => {
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tag, setTag] = useState<any>([]);
-    const { search } = useSelector((state: RootState) => state.search);
-    const dispatch = useDispatch();
+    const [toggle, setToggle] = useRecoilState(toggleAtom);
     
     const setChagneTag = (e: any) => {
         if (tag.length > 10) {
@@ -48,7 +46,7 @@ const WriteContainer = () => {
             hashtags: tag
         })
         if (response.status === 200) {
-            dispatch(getSearchListThunk(search))
+            setToggle(true);
             Router.push('/issue')
         }
     }

@@ -1,10 +1,13 @@
 import Router from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import SignIn from "../../components/user/SignIn";
+import { authAtom } from "../../store/atom";
 import { useAuth } from "../../utils/auth";
 
 const SigninContainer = () => {
     const auth = useAuth();
+    const authentication = useRecoilValue(authAtom);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const onSignin = async (e: any) => {
@@ -12,6 +15,10 @@ const SigninContainer = () => {
         await auth.signin({ username: username, password: password });
         Router.back();
     };
+    useEffect(() => {
+        if (!authentication) return;
+        Router.push('/')
+    })
     return <><SignIn
         username={username}
         password={password}

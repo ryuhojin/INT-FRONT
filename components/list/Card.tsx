@@ -7,7 +7,7 @@ const Card = ({ data, onDetail }: any) => {
     <>
       <div onClick={onDetail} className={stateBorder + "flex flex-col w-full md:w-1/2 mb-2 px-6 py-4 bg-white hover:border-cusbronze-dark border border-l-4 rounded-xl cursor-pointer"}>
         <span className="text-md font-bold line-clamp-1">{data.title} </span>
-        <span className="text-sm line-clamp-1 mt-2">{data.content}</span>
+        <span className="text-sm line-clamp-1 mt-2">{data.content.replace(/(<([^>]+)>)/gi, "")}</span>
         <hr className="mt-2" />
         {data.hashtags.length ?
           <div className="flex flex-start overflow-hidden mt-1">

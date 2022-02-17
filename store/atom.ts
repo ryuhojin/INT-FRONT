@@ -9,3 +9,8 @@ export const searchAtom = atom({
     key: 'search',
     default: "",
 });
+
+export const toggleAtom = atom({
+    key: 'toggle',
+    default: false,
+})

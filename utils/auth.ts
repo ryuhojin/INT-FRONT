@@ -1,5 +1,5 @@
 import { refresh, login, register, deleteUser, updateUser } from "../api/modules/user";
-import { cookie, getCookie } from "./common";
+import { cookie } from "./common";
 import service from "../api";
 import { useRecoilState } from 'recoil';
 import { authAtom } from "../store/atom";
@@ -16,8 +16,8 @@ export function useAuth() {
         await handleUserResponse(response);
     }
     async function signre() {
-        if (!getCookie('access-token')) return null;
-        service.defaults.headers.common["access-token"] = String(getCookie('access-token'));
+        if (!cookie.getCookie('access-token')) return null;
+        service.defaults.headers.common["access-token"] = String(cookie.getCookie('access-token'));
         const response = await refresh();
         await handleUserResponse(response);
     }
