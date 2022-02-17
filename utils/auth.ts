@@ -36,10 +36,10 @@ export function useAuth() {
   async function handleUserResponse(params: any) {
     const { headers, data } = params;
     setAuth(data);
+    service.defaults.headers.common["userId"] = data.userId;
     if (!headers["access-token"]) return;
     cookie.setCookie("access-token", headers["access-token"]);
     service.defaults.headers.common["access-token"] = headers["access-token"];
-    service.defaults.headers.common["userId"] = data.userId;
   }
   async function deluser(userId: string) {
     await deleteUser(userId);
