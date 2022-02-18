@@ -17,7 +17,7 @@ const Detail = ({ detail }: any) => {
 export default Detail;
 
 export const getServerSideProps: GetServerSideProps = async (props) => {
-    service.defaults.headers.common["access-token"] = props.req.cookies.userId
+    service.defaults.headers.common["userId"] = props.req.cookies.userId
     const id = Number(props.query.id);
     const { data } = await selectIssue(id);
     return {
