@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import service from "../../api";
 import { selectIssue } from "../../api/modules/issue";
 import Seo from "../../components/common/Seo";
 import HeaderContainer from "../../containers/base/HeaderContainer";
@@ -15,8 +16,9 @@ const Detail = ({ detail }: any) => {
 
 export default Detail;
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-    const id = Number(query.id);
+export const getServerSideProps: GetServerSideProps = async (props) => {
+    service.defaults.headers.common["access-token"] = props.req.cookies.userId
+    const id = Number(props.query.id);
     const { data } = await selectIssue(id);
     return {
         props: {
