@@ -26,6 +26,9 @@ export function useAuth() {
     service.defaults.headers.common["access-token"] = String(
       cookie.getCookie("access-token")
     );
+    service.defaults.headers.common["userId"] = String(
+      cookie.getCookie("userId")
+    );
     const response = await refresh();
     await handleUserResponse(response);
   }
@@ -40,6 +43,7 @@ export function useAuth() {
     cookie.setCookie("access-token", headers["access-token"]);
     cookie.setCookie("userId", data.userId);
     service.defaults.headers.common["access-token"] = headers["access-token"];
+    service.defaults.headers.common["userId"] = data.userId;
   }
   async function deluser(userId: string) {
     await deleteUser(userId);

@@ -1,55 +1,78 @@
 import Router from "next/router";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { createIssue } from "../../api/modules/issue";
+import { createIssue, createTempIssue } from "../../api/modules/issue";
 import IssueWrite from "../../components/write/IssueWrite";
 import { toggleAtom } from "../../store/atom";
 
 const WriteContainer = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tag, setTag] = useState<any>([]);
+  const [toggle, setToggle] = useRecoilState(toggleAtom);
 
-    const [title, setTitle] = useState("");
-    const [content, setContent] = useState("");
-    const [tag, setTag] = useState<any>([]);
-    const [toggle, setToggle] = useRecoilState(toggleAtom);
-    
-    const setChagneTag = (e: any) => {
-        if (tag.length > 10) {
-            e.target.value = "";
-            alert("최대 10개 까지의 태그만 입력가능합니다.");
-            return;
-        }
-        if (e.keyCode === 13) {
-            if (e.target.value.length > 20 || e.target.value.trim().length == 0) {
-                e.target.value = "";
-                alert("1 ~ 10자 까지의 태그를 입력하세요");
-                return;
-            }
-            if (tag.includes(e.target.value)) {
-                e.target.value = "";
-                alert("이미 있는 태그입니다");
-                return;
-            }
-            setTag([...tag, e.target.value]);
-            e.target.value = "";
-        }
-    };
-
-    const setDeleteTag = (index: number) => {
-        setTag(tag.filter((value: string, idx: any) => idx !== index));
-    };
-
-    const addIssue = async () => {
-        const response = await createIssue({
-            title: title,
-            content: content,
-            docType: 'TEXT',
-            hashtags: tag
-        })
-        if (response.status === 200) {
-            setToggle(true);
-            Router.push('/issue')
-        }
+  const setChagneTag = (e: any) => {
+    if (tag.length > 10) {
+      e.target.value = "";
+      alert("최대 10개 까지의 태그만 입력가능합니다.");
+      return;
     }
-    return <IssueWrite title={title} setTitle={setTitle} content={content} setContent={setContent} tag={tag} setChagneTag={setChagneTag} setDeleteTag={setDeleteTag} addIssue={addIssue} />
-}
+    if (e.keyCode === 13) {
+      if (e.target.value.length > 20 || e.target.value.trim().length == 0) {
+        e.target.value = "";
+        alert("1 ~ 10자 까지의 태그를 입력하세요");
+        return;
+      }
+      if (tag.includes(e.target.value)) {
+        e.target.value = "";
+        alert("이미 있는 태그입니다");
+        return;
+      }
+      setTag([...tag, e.target.value]);
+      e.target.value = "";
+    }
+  };
+
+  const setDeleteTag = (index: number) => {
+    setTag(tag.filter((value: string, idx: any) => idx !== index));
+  };
+
+  const addIssue = async () => {
+    const response = await createIssue({
+      title: title,
+      content: content,
+      docType: "TEXT",
+      hashtags: tag,
+    });
+    if (response.status === 200) {
+      setToggle(true);
+      Router.push("/issue");
+    }
+  };
+
+  const addIssueTemp = async () => {
+    const response = await createTempIssue({
+      title: title,
+      content: content,
+      docType: "TEXT",
+      hashtags: tag,
+    });
+    if (response.status === 200) {
+      Router.push("/issue");
+    }
+  };
+  return (
+    <IssueWrite
+      title={title}
+      setTitle={setTitle}
+      content={content}
+      setContent={setContent}
+      tag={tag}
+      setChagneTag={setChagneTag}
+      setDeleteTag={setDeleteTag}
+      addIssue={addIssue}
+      addIssueTemp={addIssueTemp}
+    />
+  );
+};
 export default WriteContainer;
