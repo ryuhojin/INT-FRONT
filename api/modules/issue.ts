@@ -34,7 +34,7 @@ export async function getIssueList<responseIssueListInterface>(params: {
 export async function selectIssue(id: number) {
   return await service.get(`issue/${id}`);
 }
-export async function selectIssueTemp(id: number) {
+export async function selectIssueTemp() {
   return await service.get(`issue/temp`);
 }
 export async function createIssue(params: {
