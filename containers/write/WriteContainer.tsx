@@ -1,7 +1,11 @@
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { createIssue, createTempIssue, selectIssueTemp } from "api/modules/issue";
+import {
+  createIssue,
+  createTempIssue,
+  selectIssueTemp,
+} from "api/modules/issue";
 import IssueWrite from "components/write/IssueWrite";
 import { toggleAtom } from "store/atom";
 
@@ -10,11 +14,11 @@ const WriteContainer = () => {
   const [content, setContent] = useState("");
   const [tag, setTag] = useState<any>([]);
   const [toggle, setToggle] = useRecoilState(toggleAtom);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const response = selectIssueTemp();
-    console.log(response)
-  },[])
+    console.log(response);
+  }, []);
 
   const setChagneTag = (e: any) => {
     if (tag.length > 10) {
