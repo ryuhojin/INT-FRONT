@@ -36,7 +36,10 @@ const SignIn = ({
             className="w-full h-16 m-2 pl-3 border rounded-md outline-cusblue-base"
           />
           <span className="self-end my-2">
-            <span className="hover:text-cusblue-base cursor-pointer" onClick={onSignup}>
+            <span
+              className="hover:text-cusblue-base cursor-pointer"
+              onClick={onSignup}
+            >
               회원가입
             </span>{" "}
             /{" "}
@@ -47,6 +50,15 @@ const SignIn = ({
           <button className="bg-cusblue-base hover:bg-cusblue-dark w-full text-white rounded-md h-10 m-3">
             로 그 인
           </button>
+          <a
+            onClick={() => {
+              window.location.href =
+                "http://3.20.158.73:8080/oauth2/authorization/github";
+            }}
+            className="flex justify-center cursor-pointer items-center bg-black hover:bg-gray-700 w-full text-white rounded-md h-10 m-3"
+          >
+            GITHUB 로그인
+          </a>
         </div>
       </form>
     </>

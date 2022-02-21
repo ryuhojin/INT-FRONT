@@ -6,10 +6,12 @@ const success = () => {
   const { query } = useRouter();
   const auth = useAuth();
   useEffect(() => {
-    cookie.setCookie("access-token", String(query.token));
-    auth.signre();
-    Router.push("/");
-  });
+    if (query.token) {
+      cookie.setCookie("access-token", String(query.token));
+      auth.signre();
+      Router.push("/");
+    }
+  }, [query.token]);
   return <></>;
 };
 export default success;
