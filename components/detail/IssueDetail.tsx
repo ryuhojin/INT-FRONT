@@ -1,7 +1,6 @@
 import Router from "next/router";
 
 const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue, updIssue, followUser }: any) => {
-    console.log(detail)
     const button = isSameUser ? <>
         <button className="mr-2 " onClick={() => { updIssue(detail) }}>수정</button>
         <button className="text-red-600" onClick={() => { delIssue(detail.id) }}>삭제</button></> :

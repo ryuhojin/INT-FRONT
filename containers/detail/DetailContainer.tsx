@@ -93,7 +93,6 @@ const DetailContainer = ({ detail }: any) => {
         if (Object.keys(user).length == 0) return;
         const response = await followUser(userId);
         if (response.status === 200) {
-            console.log('팔로우 완료')
         }
     }
 

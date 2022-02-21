@@ -16,8 +16,17 @@ const WriteContainer = () => {
   const [toggle, setToggle] = useRecoilState(toggleAtom);
 
   useEffect(() => {
-    const response = selectIssueTemp();
-    console.log(response);
+    async function selectTemp() {
+      const { data } = await selectIssueTemp();
+      if (data) {
+        const response = confirm("임시저장된 글을 불러오시겠습니까?");
+        if (response) {
+          setTitle(data.title);
+          setContent(data.content);
+        }
+      }
+    }
+    selectTemp();
   }, []);
 
   const setChagneTag = (e: any) => {

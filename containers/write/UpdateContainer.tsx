@@ -15,7 +15,7 @@ const UpdateContainer = () => {
         if (Object.keys(router.query).length == 0) return;
         setTitle(String(router.query.title))
         setContent(String(router.query.content))
-        setTag(Array.isArray(router.query.hashtags) ? router.query.hashtags : [router.query.hashtags])
+        setTag([])
     }, [router.query])
     const setChagneTag = (e: any) => {
         if (tag.length > 10) {

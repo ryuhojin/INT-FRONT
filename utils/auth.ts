@@ -34,16 +34,17 @@ export function useAuth() {
   }
   async function signout() {
     cookie.delCookie("access-token");
+    cookie.delCookie("userId");
     setAuth(null);
   }
   async function handleUserResponse(params: any) {
     const { headers, data } = params;
     setAuth(data);
+    cookie.setCookie("userId", data.userId);
+    service.defaults.headers.common["userId"] = data.userId;
     if (!headers["access-token"]) return;
     cookie.setCookie("access-token", headers["access-token"]);
-    cookie.setCookie("userId", data.userId);
     service.defaults.headers.common["access-token"] = headers["access-token"];
-    service.defaults.headers.common["userId"] = data.userId;
   }
   async function deluser(userId: string) {
     await deleteUser(userId);
