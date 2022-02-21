@@ -1,7 +1,9 @@
-import Seo from "../../components/common/Seo"
-import HeaderContainer from "../../containers/base/HeaderContainer"
-import UpdateContainer from "../../containers/write/UpdateContainer"
-import NFLayout from "../../layouts/NFLayout"
+import Seo from "components/common/Seo"
+
+import HeaderContainer from "containers/base/HeaderContainer"
+import UpdateContainer from "containers/write/UpdateContainer"
+
+import NFLayout from "layouts/NFLayout"
 
 const IssueUpdatePage = (props:any) => {
     return <>

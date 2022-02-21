@@ -1,6 +1,6 @@
-import Signup from "../../components/user/Signup";
+import Signup from "components/user/Signup";
 import { useState } from "react";
-import { checkName, checkUserId, register } from "../../api/modules/user";
+import { checkName, checkUserId, register } from "api/modules/user";
 import Router from "next/router";
 const SignupContainer = () => {
   const [userId, setUserId] = useState("");

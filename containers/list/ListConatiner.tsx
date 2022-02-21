@@ -1,12 +1,12 @@
-import SearchBox from "../../components/list/SearchBox";
+import SearchBox from "components/list/SearchBox";
 import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
-import { getIssues } from "../../api/modules/issue";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import { getIssues } from "api/modules/issue";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import React from "react";
-import { searchAtom, toggleAtom } from "../../store/atom";
+import { searchAtom, toggleAtom } from "store/atom";
 import { useRecoilState } from "recoil";
-import { useDebounce } from "../../hooks/useDebounce";
+import { useDebounce } from "hooks/useDebounce";
 import CardContainer from "./CardContainer";
 
 const ListContainer = () => {

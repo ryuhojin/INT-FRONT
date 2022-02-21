@@ -10,9 +10,6 @@ module.exports = withBundleAnalyzer({
   compress: true,
   swcMinify: true,
   webpack(config) {
-    return {
-      ...config,
-      mode: isProd ? "production" : "development",
-    };
+    return config;
   },
 });

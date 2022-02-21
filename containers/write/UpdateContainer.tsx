@@ -1,9 +1,9 @@
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { updateIssue } from "../../api/modules/issue";
-import IssueUpdate from "../../components/write/IssueUpdate";
-import { toggleAtom } from "../../store/atom";
+import { updateIssue } from "api/modules/issue";
+import IssueUpdate from "components/write/IssueUpdate";
+import { toggleAtom } from "store/atom";
 
 const UpdateContainer = () => {
     const router = useRouter()

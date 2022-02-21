@@ -1,7 +1,9 @@
-import Seo from "../../components/common/Seo";
-import HeaderContainer from "../../containers/base/HeaderContainer";
-import SignupContainer from "../../containers/user/SignupContainer";
-import NFLayout from "../../layouts/NFLayout";
+import Seo from "components/common/Seo";
+
+import HeaderContainer from "containers/base/HeaderContainer";
+import SignupContainer from "containers/user/SignupContainer";
+
+import NFLayout from "layouts/NFLayout";
 
 const SignUp = () => {
     return <>

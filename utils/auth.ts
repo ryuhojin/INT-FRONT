@@ -4,11 +4,11 @@ import {
   register,
   deleteUser,
   updateUser,
-} from "../api/modules/user";
+} from "api/modules/user";
 import { cookie } from "./common";
-import service from "../api";
+import service from "api";
 import { useRecoilState } from "recoil";
-import { authAtom } from "../store/atom";
+import { authAtom } from "store/atom";
 
 export function useAuth() {
   const [auth, setAuth] = useRecoilState(authAtom);

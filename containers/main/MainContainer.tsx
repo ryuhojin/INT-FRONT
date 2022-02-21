@@ -1,6 +1,6 @@
-import SearchBox from "../../components/main/SearchBox"
+import SearchBox from "components/main/SearchBox"
 import Router from "next/router";
-import { searchAtom } from "../../store/atom";
+import { searchAtom } from "store/atom";
 import { useRecoilState } from "recoil";
 const MainContainer = () => {
     const [search, setSearch] = useRecoilState(searchAtom);

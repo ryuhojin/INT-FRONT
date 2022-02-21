@@ -44,8 +44,8 @@ const IssueDetail = ({ detail, isSameUser, onIssueList, delIssue, updIssue, foll
                 <span className="text-2xl cursor-pointer" onClick={() => { Router.push({ pathname: `/user/${detail.developer.name}` }); }}>
                     {detail.developer.name}
                 </span>
-                <button className={(detail.developer.followYn === true ? "border-red-400 " : "border-gray-500 " )+"flex px-2 py-1 border rounded-md "} onClick={() => { followUser(detail.developer.userId) }}>
-                    좋아요&nbsp;<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                <button className={(detail.developer.followYn === true ? "border-gray-500 text-gray-500 " : "border-gray-500 " )+"flex px-2 py-1 border rounded-md "} onClick={() => { followUser(detail.developer.userId) }}>
+                    {detail.developer.followYn === true ? "팔로우 중":"팔로우"}&nbsp;<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </button>

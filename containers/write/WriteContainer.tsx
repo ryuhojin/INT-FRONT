@@ -1,9 +1,9 @@
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { createIssue, createTempIssue, selectIssueTemp } from "../../api/modules/issue";
-import IssueWrite from "../../components/write/IssueWrite";
-import { toggleAtom } from "../../store/atom";
+import { createIssue, createTempIssue, selectIssueTemp } from "api/modules/issue";
+import IssueWrite from "components/write/IssueWrite";
+import { toggleAtom } from "store/atom";
 
 const WriteContainer = () => {
   const [title, setTitle] = useState("");

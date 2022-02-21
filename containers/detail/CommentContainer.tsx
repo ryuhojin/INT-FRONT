@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createComment, deleteComment, selectComment, updateComment } from "../../api/modules/comment";
-import Comment from "../../components/detail/Comment";
+import { createComment, deleteComment, selectComment, updateComment } from "api/modules/comment";
+import Comment from "components/detail/Comment";
 const CommentContainer = ({ user, comment, getSolution, solutionId }: any) => {
     const [content, setContent] = useState("");
 

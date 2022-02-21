@@ -1,15 +1,15 @@
 import { useState } from "react";
-import IssueDetail from "../../components/detail/IssueDetail";
-import SolutionList from "../../components/detail/SolutionList";
+import IssueDetail from "components/detail/IssueDetail";
+import SolutionList from "components/detail/SolutionList";
 import Router from "next/router";
 
 import "highlight.js/styles/github-dark.css";
 import "react-quill/dist/quill.snow.css";
 import { deleteSolution, selectSolutionList, createSolution, updateSolution, adobtSolution, recommendSolution, selectSolution } from "../../api/modules/solution";
-import { deleteIssue } from "../../api/modules/issue";
-import { followUser } from "../../api/modules/user";
+import { deleteIssue } from "api/modules/issue";
+import { followUser } from "api/modules/user";
 import { useRecoilState, useRecoilValue, } from "recoil";
-import { authAtom, toggleAtom } from "../../store/atom";
+import { authAtom, toggleAtom } from "store/atom";
 
 const DetailContainer = ({ detail }: any) => {
     const [content, setContent] = useState("");

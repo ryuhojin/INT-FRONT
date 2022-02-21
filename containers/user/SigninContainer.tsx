@@ -1,9 +1,9 @@
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import SignIn from "../../components/user/SignIn";
-import { authAtom } from "../../store/atom";
-import { useAuth } from "../../utils/auth";
+import SignIn from "components/user/SignIn"
+import { authAtom } from "store/atom";
+import { useAuth } from "utils/auth";
 
 const SigninContainer = () => {
     const auth = useAuth();

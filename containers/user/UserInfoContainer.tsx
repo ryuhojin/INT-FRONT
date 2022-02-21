@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { getUserInfo } from "../../api/modules/user";
-import UserInfoID from "../../components/user/UserInfoID";
+import { getUserInfo } from "api/modules/user";
+import UserInfoID from "components/user/UserInfoID";
 import { useEffect } from "react";
 const UserInfoContainer = ({ id }: any) => {
   const [inputState, setInputState] = useState(false);

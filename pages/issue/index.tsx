@@ -1,7 +1,10 @@
-import Seo from "../../components/common/Seo";
-import HeaderContainer from "../../containers/base/HeaderContainer";
-import ListContainer from "../../containers/list/ListConatiner";
-import NFLayout from "../../layouts/NFLayout";
+import Seo from "components/common/Seo";
+
+import HeaderContainer from "containers/base/HeaderContainer";
+import ListContainer from "containers/list/ListConatiner";
+
+import NFLayout from "layouts/NFLayout";
+
 const IssueListPage = () => {
   return (
     <>

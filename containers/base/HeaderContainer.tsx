@@ -1,10 +1,10 @@
 import Router from "next/router";
-import Header from "../../components/base/Header";
+import Header from "components/base/Header";
 import UserMenuContainer from "./UserMenuContainer";
 import { useState } from "react";
-import { useAuth } from "../../utils/auth";
+import { useAuth } from "utils/auth";
 import { useRecoilValue } from "recoil";
-import { authAtom } from "../../store/atom";
+import { authAtom } from "store/atom";
 const HeaderContainer = () => {
     const user = useRecoilValue(authAtom);
     const auth = useAuth();

@@ -1,5 +1,5 @@
 import Router from "next/router";
-import UserMenu from "../../components/base/UserMenu";
+import UserMenu from "components/base/UserMenu";
 
 const UserMenuContainer = ({ toggleTab, user }: any) => {
     const onGetIssueList = () => Router.push('/issue')

@@ -1,5 +1,5 @@
 import Router from "next/router";
-import Card from "../../components/list/Card";
+import Card from "components/list/Card";
 
 const CardContainer = ({ data }: any) => {
     const onDetail = () => {
