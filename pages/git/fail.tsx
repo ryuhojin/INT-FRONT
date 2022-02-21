@@ -1,9 +1,9 @@
 import Router from "next/router";
 import { useEffect } from "react";
-const fail = () => {
+const Fail = () => {
   useEffect(() => {
     Router.push("/");
-  });
+  }, []);
   return <></>;
 };
-export default fail;
+export default Fail;
