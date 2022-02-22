@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil';
+import theme from 'src/styles/theme';
+import { ThemeProvider } from 'styled-components';
 import 'styles/globals.css'
 import { ReactQueryProvider } from 'utils/react-query';
 
@@ -7,7 +9,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ReactQueryProvider>
       <RecoilRoot>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </RecoilRoot>
     </ReactQueryProvider>);
 }
