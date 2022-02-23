@@ -7,16 +7,10 @@ https://www.notworking.kr/
 
 > Language : TypeScript <br/>
 > Framework : NextJS <br/>
-> Style : TailwindCSS <br/>
+> Style : TailwindCSS => Styled-Components<br/>
 > State Management(~2022-02-15) : Redux + Redux Thunk(store의 사용이유가 좀 애매해지고 있다고 느낌, 단순한 리스트 조회 인데 지나치게 작업이 많음)<br/>
-> State Management(2022-02-16~) : Recoil + react Query<br/>
+> State Management(2022-02-16~) : Recoil + react Query(리코일이랑 화면 상태는 url파람으로 관리할까 고민중)<br/>
 > Tools : LightHouse
-
-### Using Library
-
-> Quill Editor <br/>
-> HighlightJS <br/>
-> Infinite Scroll <br/>
 
 ### LIGHT HOUSE SCORE
 
