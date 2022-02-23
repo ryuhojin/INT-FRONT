@@ -1,6 +1,6 @@
 @import url(tailwind.css);
 @import url(font.css);
-html,
+/* html,
 body,
 #__next {
     height: 100%;
@@ -23,4 +23,4 @@ body,
 
 .ql-editor-none {
     padding: 5px 0px !important
-}
+} */
