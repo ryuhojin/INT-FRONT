@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Edit from "src/components/user/Edit";
 import { authAtom } from "store/atom";
+import { useMessage } from "utils/message";
 
 
 const EditContainer = () => {
+    const auth = useAuth();
     const [user, setUser]: [user: any, setUser: any] = useRecoilState(authAtom)
     const [userState, setUserState] = useState(user);
+    const messageFn = useMessage();
 
     useEffect(() => {
         setUserState(user);
@@ -41,8 +44,10 @@ const EditContainer = () => {
     const onEdit = async () => {
         const { data } = await checkName(userState.name);
         if (data.adoptYn) {
+            messageFn.show('중복된 이름이 있습니다')
             return;
         }
+        await auth.uptuser(userState);
     }
     const onCancel = () => {
         Router.push('/user/info2')

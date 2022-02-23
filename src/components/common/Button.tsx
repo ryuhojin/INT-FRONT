@@ -53,7 +53,7 @@ const fullWidthStyle = css`
   ${(props: any) =>
         props.fullWidth &&
         css`
-      width: 100%
+      width: -webkit-fill-available;
       justify-content: center;
       &:not(:first-child) {
         margin-left: 0;
@@ -68,10 +68,12 @@ const StyledButton = styled.button`
   align-items: center;
   outline: none;
   border: none;
+  border-radius: 4px;
   color: white;
   font-weight: bold;
   cursor: pointer;
   justify-content: center;
+
   /* 크기 */
   ${sizeStyles}
 

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { messageAtom } from "store/atom";
+import { useMessage } from "utils/message";
 import styled, { css, keyframes } from "styled-components";
 import Button from "./Button";
 const fadeIn = keyframes`
@@ -65,6 +68,7 @@ const DialogBlock = styled.div`
     font-size: 1.5rem;
   }
   p {
+    margin-top:0.5rem;
     font-size: 1.125rem;
   }
 
@@ -86,10 +90,12 @@ const ButtonGroup = styled.div`
   justify-content: center;
 `;
 
-const Alert = ({ title, children, confirmText, onConfirm, visible }: any) => {
+const Alert = ({ confirmText }: any) => {
+    const message = useRecoilValue(messageAtom);
+    const messageFn = useMessage();
+    const visible = message.isShow;
     const [animate, setAnimate] = useState(false);
     const [localVisible, setLocalVisible] = useState(visible);
-
     useEffect(() => {
         if (localVisible && !visible) {
             setAnimate(true);
@@ -100,12 +106,13 @@ const Alert = ({ title, children, confirmText, onConfirm, visible }: any) => {
 
     if (!animate && !localVisible) return null;
     return (
+
         <DarkBackground disappear={!visible}>
             <DialogBlock disappear={!visible}>
-                <h3>{title}</h3>
-                <p>{children}</p>
+                <h3>{message.title}</h3>
+                <p>{message.message}</p>
                 <ButtonGroup>
-                    <Button color="red" onClick={onConfirm}>
+                    <Button color="red" onClick={() => { messageFn.close() }}>
                         {confirmText}
                     </Button>
                 </ButtonGroup>

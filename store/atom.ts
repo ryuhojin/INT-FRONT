@@ -19,3 +19,12 @@ export const mobileMenu = atom({
     key: 'mobileMenu',
     default: false,
 })
+
+export const messageAtom = atom({
+    key: 'message',
+    default: {
+        title: "주의",
+        message: "",
+        isShow: false
+    },
+})

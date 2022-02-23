@@ -4,9 +4,10 @@ import { useRecoilValue } from "recoil";
 import Login from "src/components/user/Login";
 import { authAtom } from "store/atom";
 import { useAuth } from "utils/auth";
+import { useMessage } from "utils/message";
 
 const LoginContainer = () => {
-
+    const message = useMessage();
     const auth = useAuth();
     const authentication = useRecoilValue(authAtom);
     const [username, setUsername] = useState("");
@@ -33,11 +34,16 @@ const LoginContainer = () => {
             //에러처리
         }
     }
+    const onGithubLogin = (e: any) => {
+        e.preventDefault();
+        message.show("미구현")
+    }
 
     return <Login username={username}
         password={password}
         onChangeUsername={onChangeUsername}
         onChangePassword={onChangePassword}
-        onSubmit={onSubmit} />
+        onSubmit={onSubmit}
+        onGithubLogin={onGithubLogin} />
 }
 export default LoginContainer;
