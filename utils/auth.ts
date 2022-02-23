@@ -13,6 +13,9 @@ import { authAtom } from "store/atom";
 export function useAuth() {
   const [auth, setAuth] = useRecoilState(authAtom);
 
+  function isLoggedIn() {
+    return auth !== null ? true : false;
+  }
   async function signin(params: any) {
     const response = await login(params);
     await handleUserResponse(response);
@@ -63,5 +66,6 @@ export function useAuth() {
     signre,
     deluser,
     uptuser,
+    isLoggedIn
   };
 }

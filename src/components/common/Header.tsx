@@ -1,34 +1,58 @@
 import styled from 'styled-components'
-import { MdListAlt, MdLogin } from 'react-icons/md'
+import { MdListAlt, MdLogin, MdLogout, MdPermIdentity, MdMenu } from 'react-icons/md'
+import React from 'react'
+import { mobileMenu } from 'store/atom'
+import { useSetRecoilState } from 'recoil'
 const HeaderStyle = styled.div`
     height:100%;
     padding:0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
+  
+
 `
-const Logo = styled.h1`
-    
+const LogoStyle = styled.h1`
+    cursor:pointer;
 `
-const PCMenu = styled.div`
+const MenuStyle = styled.div`
     display : flex ;
     div {
         align-items: center;
         display: flex;
+        cursor:pointer;
     }
     div + div {
         margin-left:1rem;
     } 
+    .menu {
+        display:none;
+    }
+    @media only screen and (max-width: 550px) {
+        .info, .logout {
+            display:none;
+        }
+        .menu {
+            display:flex;
+        }
+    }
 `
 
-const Header = () => {
+const Menu = (isLoggedIn: boolean, onLogin: any, onLogout: any, onStatus: any) => {
+    const setState = useSetRecoilState(mobileMenu);
+    const onMenu = () => {  
+        setState(true);
+    }
+    return isLoggedIn ? <><div className='menu' onClick={onMenu}><MdMenu />&nbsp;메뉴</div><div className='info' onClick={onStatus}><MdPermIdentity />&nbsp;내 정보</div><div className='logout' onClick={onLogout}><MdLogout />&nbsp;로그아웃</div></> : <div className='login' onClick={onLogin}><MdLogin />&nbsp;로그인</div>
+}
+const Header = ({ isLoggedIn, onHome, onLogin, onLogout, onStatus }: { isLoggedIn: boolean, onHome: any, onLogin: any, onLogout: any, onStatus: any }) => {
     return <HeaderStyle>
-        <Logo>NOT WORKING</Logo>
-        <PCMenu>
-            <div><MdListAlt />&nbsp;목록</div>
-            <div><MdLogin />&nbsp;로그인</div>
-        </PCMenu>
+        <LogoStyle onClick={onHome}>NOT WORKING</LogoStyle>
+        <MenuStyle>
+            <div className='list'><MdListAlt />&nbsp;목록</div>
+            {Menu(isLoggedIn, onLogin, onLogout, onStatus)}
+        </MenuStyle>
     </HeaderStyle>
 }
-export default Header;
+export default React.memo(Header);

@@ -1,4 +1,3 @@
-import { JSXElementConstructor } from "react";
 import styled from "styled-components";
 
 const MainLayoutStyle = styled.div`

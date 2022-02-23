@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components'
 const FooterStyle = styled.div`
     height:100%;
@@ -15,4 +16,4 @@ const Footer = () => {
         <p>interarea@naver.com</p>
     </FooterStyle>
 }
-export default Footer;
+export default React.memo(Footer);

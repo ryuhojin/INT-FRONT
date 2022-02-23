@@ -14,3 +14,8 @@ export const toggleAtom = atom({
     key: 'toggle',
     default: false,
 })
+
+export const mobileMenu = atom({
+    key: 'mobileMenu',
+    default: false,
+})

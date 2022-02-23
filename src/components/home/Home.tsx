@@ -9,7 +9,7 @@ const HomeStyle = styled.div`
 `
 const Home = () => {
     return <HomeStyle>
-        <Search placeholder={"검색어를 입력후 Enter를 눌러주세요"}/>
+        <Search placeholder={"검색어를 입력후 Enter를 눌러주세요..."}/>
     </HomeStyle>
 }
 export default Home;

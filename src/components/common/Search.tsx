@@ -1,21 +1,24 @@
 import styled from "styled-components";
 import { MdSearch } from 'react-icons/md';
-import { lighten } from "polished";
+import { darken } from "polished";
 
 const SearchStyle = styled.div`
     width:30%;
     height:40px;
     display:flex;
     align-items: center;
+    border-radius:10px;
     border: 1px solid #000;
-    border-radius:25px;
     padding: 0.5rem 1rem;
 
+    :first-child{
+        color:#000;
+    }
     :hover{
-        border-color:${lighten(0.5, '#000')};
+        /* border-color: ${darken(0.5, '#e6e6e6')}; */
     }
     :first-child:hover{
-        color:${lighten(0.5, '#000')};
+        /* color:${darken(0.5, '#e6e6e6')}; */
     }
     input[type='text']{
         width:100%;
@@ -25,6 +28,7 @@ const SearchStyle = styled.div`
         font-size:1.125em;
         font-weight: 600;
         padding-left:0.5rem;
+        align-self: baseline;
     }
     @media only screen and (max-width: 550px) {
         width:100%;

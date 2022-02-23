@@ -6,7 +6,7 @@ import MainLayout from "src/layouts/MainLayout";
 
 const Index2 = () => {
     return <>
-        <Seo title="메인"></Seo>
+        <Seo title="홈"></Seo>
         <MainLayout header={<HeaderContainer />} home={<HomeContainer />} footer={<FooterContainer />} />
     </>
 }

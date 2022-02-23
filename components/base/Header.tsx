@@ -1,4 +1,4 @@
-const Header = ({ userMenu, onHome, tabState, onGetUserInfo, onSignout }: any) => {
+const Header = ({ userMenu, onHome, tabState, onUserInfo, onSignout }: any) => {
     return <>
         <div className={(tabState == false ? "border-b " : "") + "flex flex-row w-full h-20"}>
             <div className="container px-4 mx-auto w-full h-full flex justify-between items-center">

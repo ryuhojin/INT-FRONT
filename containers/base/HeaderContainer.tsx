@@ -13,13 +13,13 @@ const HeaderContainer = () => {
     const toggleTab = () => setTab(!tab);
 
     const onHome = () => Router.push('/')
-    const onGetUserInfo = () => Router.push('/user/info')
+    const onUserInfo = () => Router.push('/user/info2')
     const onSignout = async () => {
         setTab(!tab);
         auth.signout();
         Router.push('/')
     }
 
-    return <Header userMenu={<UserMenuContainer toggleTab={toggleTab} user={user} />} onHome={onHome} onGetUserInfo={onGetUserInfo} onSignout={onSignout} tabState={tab} />;
+    return <Header userMenu={<UserMenuContainer toggleTab={toggleTab} user={user} />} onHome={onHome} onGetUserInfo={onUserInfo} onSignout={onSignout} tabState={tab} />;
 }
 export default HeaderContainer;

@@ -22,7 +22,7 @@ const Seo = ({ title, contents }: { title: string, contents?: string }) => {
             property="og:description"
             content={`${contents ? contents : title}`}
         />
-        <title>ISNOTWORKING | {title}</title>
+        <title>NOT WORKING | {title}</title>
     </Head>
 }
 export default Seo;
