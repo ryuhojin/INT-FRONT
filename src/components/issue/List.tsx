@@ -11,7 +11,7 @@ const ListStyle = styled.div`
     grid-template-rows:1fr;
     grid-template-areas: "left middle right";
     @media only screen and (max-width: 550px) {
-        grid-template-columns: minmax(1rem,auto) minmax(20rem,auto) minmax(1rem,auto);
+        grid-template-columns: 1rem minmax(20rem,auto) 1rem;
         grid-template-rows: 1fr;
         grid-template-areas: "left middle right";
     }
@@ -30,10 +30,11 @@ const CardSkeletonGroup = () => {
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
+        <CardSkeleton />
     </>
 }
 
-const List = ({ search, status, data, setSearch, hasMoreChecker, isFetchingNextPage }: { search: string, status: string, data: any, setSearch: any, hasMoreChecker: any, isFetchingNextPage: any }) => {
+const List = ({ search, status, data, setSearch, hasMoreChecker, isFetchingNextPage, onDetail }: { search: string, status: string, data: any, setSearch: any, hasMoreChecker: any, isFetchingNextPage: any, onDetail: any }) => {
     return <ListStyle>
         <LeftPanel />
         <SearchPanel>
@@ -47,7 +48,7 @@ const List = ({ search, status, data, setSearch, hasMoreChecker, isFetchingNextP
                         data?.pages.map((value: any, index: any) => {
                             return <React.Fragment key={index}>
                                 {value.data.map((value: any, index: any) => {
-                                    return <Card title={value?.title} content={value.content.replace(/(<([^>]+)>)/gi, "")} name={value.developer.name} date={value.modifiedDate.substring(0,10).replace(/-/gi,".")} count={value.solutionCount} adoptYn={value.adoptYn} key={index} index={value.id} />
+                                    return <Card title={value?.title} content={value.content.replace(/(<([^>]+)>)/gi, "")} name={value.developer.name} date={value.modifiedDate.substring(0, 10).replace(/-/gi, ".")} count={value.solutionCount} adoptYn={value.adoptYn} key={index} index={value.id} onDetail={onDetail} />
                                 })}
                             </React.Fragment>
                         }) : <h1 style={{ textAlign: 'center' }}>검색된 이슈가 없습니다.</h1>

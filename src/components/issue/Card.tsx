@@ -46,8 +46,8 @@ const FlexStyle = styled.div`
     display:flex;
     justify-content: space-between;
 `
-const Card = ({ title, index, content, name, date, count, adoptYn }: { index: number, title: string, content: string, name: string, date: string, count: number, adoptYn: boolean }) => {
-   return <CardStyle>
+const Card = ({ title, index, content, name, date, count, adoptYn, onDetail }: { index: number, title: string, content: string, name: string, date: string, count: number, adoptYn: boolean, onDetail: any }) => {
+    return <CardStyle onClick={() => { onDetail(index) }}>
         <h1>{title}</h1>
         <p>{content}</p>
         <FlexStyle><span>{count} 개의 솔루션</span>{adoptYn ? <span style={{ "color": "orange" }}>채택됨</span> : <span >채택안됨</span>}</FlexStyle>

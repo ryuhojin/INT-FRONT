@@ -1,6 +1,7 @@
 import { getIssues } from "api/modules/issue";
 import { useDebounce } from "hooks/useDebounce";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
+import Router from "next/router";
 import { useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -38,6 +39,8 @@ const ListContainer = () => {
         }
     )
 
+    const onDetail = (id: number) => Router.push(`/issue/${id}`)
+
     const hasMoreChecker = useRef(null);
 
     useIntersectionObserver({
@@ -45,6 +48,6 @@ const ListContainer = () => {
         onIntersect: fetchNextPage,
         enabled: !!hasNextPage,
     })
-    return <List search={search} isFetchingNextPage={isFetchingNextPage} hasMoreChecker={hasMoreChecker} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} status={status} data={data} />
+    return <List search={search} isFetchingNextPage={isFetchingNextPage} hasMoreChecker={hasMoreChecker} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} status={status} data={data} onDetail={onDetail} />
 }
 export default ListContainer;
