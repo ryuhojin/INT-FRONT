@@ -41,16 +41,16 @@ const MenuStyle = styled.div`
 
 const Menu = (isLoggedIn: boolean, onLogin: any, onLogout: any, onStatus: any) => {
     const setState = useSetRecoilState(mobileMenu);
-    const onMenu = () => {  
+    const onMenu = () => {
         setState(true);
     }
     return isLoggedIn ? <><div className='menu' onClick={onMenu}><MdMenu />&nbsp;메뉴</div><div className='info' onClick={onStatus}><MdPermIdentity />&nbsp;내 정보</div><div className='logout' onClick={onLogout}><MdLogout />&nbsp;로그아웃</div></> : <div className='login' onClick={onLogin}><MdLogin />&nbsp;로그인</div>
 }
-const Header = ({ isLoggedIn, onHome, onLogin, onLogout, onStatus }: { isLoggedIn: boolean, onHome: any, onLogin: any, onLogout: any, onStatus: any }) => {
+const Header = ({ isLoggedIn, onHome, onLogin, onLogout, onStatus, onList }: { isLoggedIn: boolean, onHome: any, onLogin: any, onLogout: any, onStatus: any, onList: any }) => {
     return <HeaderStyle>
         <LogoStyle onClick={onHome}>NOT WORKING</LogoStyle>
         <MenuStyle>
-            <div className='list'><MdListAlt />&nbsp;목록</div>
+            <div className='list' onClick={onList}><MdListAlt />&nbsp;목록</div>
             {Menu(isLoggedIn, onLogin, onLogout, onStatus)}
         </MenuStyle>
     </HeaderStyle>

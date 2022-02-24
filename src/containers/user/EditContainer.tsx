@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import Edit from "src/components/user/Edit";
 import { authAtom } from "store/atom";
+import { useAuth } from "utils/auth";
 import { useMessage } from "utils/message";
 
 
@@ -48,6 +49,8 @@ const EditContainer = () => {
             return;
         }
         await auth.uptuser(userState);
+        Router.back()
+        
     }
     const onCancel = () => {
         Router.push('/user/info2')

@@ -31,7 +31,7 @@ const LoginContainer = () => {
             await auth.signin({ username: username, password: password })
             Router.back();
         } catch (e) {
-            //에러처리
+            message.show("로그인 정보를 다시 확인해주세요.")
         }
     }
     const onGithubLogin = (e: any) => {

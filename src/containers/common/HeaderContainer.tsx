@@ -13,6 +13,9 @@ const HeaderContainer = () => {
     const onHome = () => {
         Router.push('/index2')
     }
+    const onList = () => {
+        Router.push('/issue/index2')
+    }
     /**
      * @name onLogin
      * @description 로그인 페이지로 전환
@@ -36,6 +39,6 @@ const HeaderContainer = () => {
         Router.push('/user/info2')
     }
 
-    return <Header isLoggedIn={isLoggedIn} onHome={onHome} onLogin={onLogin} onLogout={onLogout} onStatus={onStatus} />
+    return <Header isLoggedIn={isLoggedIn} onHome={onHome} onList={onList} onLogin={onLogin} onLogout={onLogout} onStatus={onStatus} />
 }
 export default HeaderContainer;
