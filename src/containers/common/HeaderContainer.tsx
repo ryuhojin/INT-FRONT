@@ -38,7 +38,14 @@ const HeaderContainer = () => {
     const onStatus = () => {
         Router.push('/user/info2')
     }
+    /**
+     * @name onStatus
+     * @description 글쓰기 페이지로 전환
+     */
+    const onWrite = () => {
+        Router.push('/issue/write2')
+    }
 
-    return <Header isLoggedIn={isLoggedIn} onHome={onHome} onList={onList} onLogin={onLogin} onLogout={onLogout} onStatus={onStatus} />
+    return <Header isLoggedIn={isLoggedIn} onHome={onHome} onList={onList} onLogin={onLogin} onLogout={onLogout} onStatus={onStatus} onWrite={onWrite} />
 }
 export default HeaderContainer;

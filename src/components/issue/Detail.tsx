@@ -1,5 +1,10 @@
 import styled from "styled-components";
-
+import TipTap from "../common/TipTap";
+import { FaGithub, FaBlogger, FaRegThumbsUp } from 'react-icons/fa'
+import { RiChatFollowUpLine } from 'react-icons/ri'
+import { MdRecommend } from 'react-icons/md'
+import Button from "../common/Button";
+import Router from "next/router";
 const DetailStyle = styled.div`
     height:100%;
     display:flex;
@@ -7,19 +12,14 @@ const DetailStyle = styled.div`
     margin:0 1rem;
     @media only screen and (min-width: 550px) {
         margin: 0 auto;
-        width:30%;
+        width:35%;
     }
 `;
 const DetailTitleStyle = styled.div`
     border-radius: 10px;
-    margin-top:2rem;
     h1{
-        font-size:1.5rem;
-        line-height: 1.725rem;
+        margin:0.5rem 0 1rem 0;
         font-weight: bold;
-    }
-    div{
-
     }
     .strong {
         font-weight: 600;
@@ -30,41 +30,111 @@ const DetailTagStyle = styled.div`
     border-radius: 10px;
     span {
         color:white;
-        font-weight:bold;
         padding: 0.2rem 0.5rem;
         border-radius:10px;
-        background:#d1d1d1;
+        background:rgba(0,0,0,0.5);
         font-size:0.8rem;
         line-height: 1.8rem;
-        cursor:pointer;
+    }
+    span + span {
+        margin-left:0.3rem;
     }
 `
 
 const DetailContentStyle = styled.div`
     margin:0.5rem 0;
     border-radius: 10px;
+    line-height:1.5rem;
 `
-const DetailSolutionStyle = styled.div`
-    
+const DetailProfileStyle = styled.div`
+    h2{
+        display:flex;
+        justify-content: space-between;
+    }
 `
-const Detail = () => {
+const SolutionStyle = styled.div`
+    border:1px solid black;
+    padding:0.5rem;
+    margin-top:1rem;
+    .flex-between{
+        display: flex;
+        justify-content: space-between;
+        font-size:0.8rem;
+    }
+`
+const CommentStyle = styled.div`
+    margin-top:0.5rem;
+    textarea {
+        width: -webkit-fill-available;
+    }
+`
+const ReplyStyle = styled.div`
+    p{
+        font-size:0.7rem;
+    }
+    .flex-between{
+        display: flex;
+        justify-content: space-between;
+        font-size:0.7rem;
+    }
+`
+const Detail = ({ detail }: any) => {
     return <DetailStyle>
         <DetailTitleStyle>
-            <h1>안녕하 하세요 안녕 하세요 안녕세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하하세요 안녕 하세요 안녕하세요 안녕요 안녕하세요</h1>
-            <br />
-            <span><span className="strong">류호진</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span>2022.01.24</span></span>
+            <h2 style={{cursor:'pointer','margin':'2rem 0'}} onClick={() => Router.back()}>← 뒤로가기</h2>
+            <h1>{detail.title}</h1>
+            <span><strong>{detail.developer.name}</strong>&nbsp;&nbsp;·&nbsp;&nbsp;<span>{detail.modifiedDate.substring(0, 10).replace(/-/gi, '.')}</span></span>
             <br />
         </DetailTitleStyle>
         <DetailTagStyle>
-            <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span> <span># 가나다라</span>
+            {detail.hashtags && detail.hashtags.map((value: any, index: any) => {
+                return <span key={index}># {value}</span>
+            })}
         </DetailTagStyle>
         <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
         <DetailContentStyle>
-            가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라바사아자카타파하  가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하 가나다라마바사아자카타파하
+            <TipTap isEditable={false} height="300px" mode="reader" content={detail.content} />
         </DetailContentStyle>
-        <DetailSolutionStyle>
-            
-        </DetailSolutionStyle>
+        <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
+        <DetailProfileStyle>
+            <h2><span>{detail.developer.name}&nbsp;<RiChatFollowUpLine /></span><span><FaGithub />&nbsp;&nbsp;<FaBlogger /></span></h2>
+            <h4>{detail.developer.introduction}</h4>
+        </DetailProfileStyle>
+        <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
+        <h3 style={{ margin: '0.5rem 0 1rem 0' }}>SOLUTION</h3>
+        <TipTap isEditable={true} height="150px" mode="editor" />
+        <Button fullWidth size="medium">솔루션 등록</Button>
+        {detail.solutions && detail.solutions.map((value: any, index: any) => {
+            return <>
+                <SolutionStyle>
+                    <TipTap isEditable={false} height="100%" mode="reader" content={value.content} key={index} />
+                    <p className="flex-between">
+                        <strong>{value.developer.name}{value.adoptYn ? <span style={{ color: 'orange' }}>&nbsp;·&nbsp;채택됨</span> : <></>}</strong>
+                        <span><FaRegThumbsUp size={12} /> {value.recommendationCount}</span>
+                    </p>
+                    <hr />
+                    <h5 style={{ 'textAlign': 'center', 'margin': '0.2rem 0' }}>최종 수정 시간 : {value.modifiedDate}</h5>
+                    <p style={{ 'textAlign': 'right', 'fontSize': '0.8rem', 'margin': '0.2rem 0' }}>댓글 ▼</p>
+                    <CommentStyle>
+                        <textarea />
+                        <Button style={{ marginTop: '0.2rem' }} fullWidth>이슈 등록</Button>
+                        {value.comment && value.comment.map((value: any, index: any) => {
+                            return <>
+                                <ReplyStyle key={index}>
+                                    <p>
+                                        {value.content}
+                                    </p>
+                                    <p className="flex-between">
+                                        <span>{value.developer.name}</span><span>{value.modifiedDate.substring(0, 10).replace(/-/gi, '.')}</span>
+                                    </p>
+                                </ReplyStyle>
+                            </>
+                        })}
+                    </CommentStyle>
+                </SolutionStyle>
+            </>
+        })}
+        <br />
     </DetailStyle>
 }
 export default Detail;

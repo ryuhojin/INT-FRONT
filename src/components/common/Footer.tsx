@@ -8,6 +8,9 @@ const FooterStyle = styled.div`
     align-items: center;
     font-size:0.7em;
     line-height: 1rem;
+    p{
+        margin:0;
+    }
 `
 const Footer = () => {
     return <FooterStyle>

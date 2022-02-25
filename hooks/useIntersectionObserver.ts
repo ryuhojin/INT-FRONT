@@ -21,7 +21,6 @@ export default function useIntersectionObserver({
                 threshold,
             }
         )
-        console.log(observer)
 
         const el = target && target.current
 

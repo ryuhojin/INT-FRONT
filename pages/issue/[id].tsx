@@ -12,7 +12,7 @@ const DetailPage = ({ detail }: any) => {
     return <>
         <Seo title={detail.title}
             contents={detail.content.replace(/(<([^>]+)>)/gi, "").substring(0, 50)} />
-        <MainLayout header={<HeaderContainer />} home={<DetailContainer />} footer={<FooterContainer />} />
+        <MainLayout header={<HeaderContainer />} home={<DetailContainer detail={detail}/>} footer={<FooterContainer />} />
     </>
 
 }

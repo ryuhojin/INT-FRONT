@@ -77,8 +77,17 @@ const Menu = () => {
         closeMenu();
         Router.push('/user/info2')
     }
+    /**
+     * @name onWrite
+     * @description 글쓰기 페이지로 전환
+     */
+    const onWrite = () => {
+        closeMenu();
+        Router.push('/issue/write2')
+    }
     return <MenuStyle isOpen={state}>
         <div onClick={closeMenu}><MdClose size={30} /></div>
+        <h1 onClick={onWrite}>이슈 등록</h1>
         <h1 onClick={onStatus}>내 정보</h1>
         <h1 onClick={onLogout}>로그아웃</h1>
     </MenuStyle>

@@ -28,6 +28,10 @@ const MyInfoStyle = styled.div`
         margin-left:1rem;
         margin-right:1rem;
     }
+    .margin-x {
+        margin-left:1rem;
+        margin-right:1rem;
+    }
     h1{
         font-size:1.875rem;
         line-height:2.25rem;
@@ -57,7 +61,7 @@ const Myinfo = ({ onEdit, user }: { onEdit: any, user: any }) => {
         <h1>내 정보</h1>
         <div>
             <h2 className="margin">{user?.name}( LV.1 )님 반갑습니다.</h2>
-            <span className="margin font-normal">{user?.introduction}</span>
+            <span className="margin-x font-normal">{user?.introduction}</span>
             <hr />
             <table className="margin font-normal">
                 <colgroup>

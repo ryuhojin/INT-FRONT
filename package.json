@@ -9,6 +9,13 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^12.0.10",
+    "@tiptap/extension-blockquote": "^2.0.0-beta.26",
+    "@tiptap/extension-code-block-lowlight": "^2.0.0-beta.68",
+    "@tiptap/extension-color": "^2.0.0-beta.9",
+    "@tiptap/extension-text-style": "^2.0.0-beta.23",
+    "@tiptap/extension-underline": "^2.0.0-beta.23",
+    "@tiptap/react": "^2.0.0-beta.108",
+    "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@types/styled-components": "^5.1.23",
     "lodash-es": "^4.17.21",
     "next": "12.0.10",
