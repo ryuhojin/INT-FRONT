@@ -9,22 +9,31 @@ import DetailContainer from "src/containers/issue/DetailContainer";
 import MainLayout from "src/layouts/MainLayout";
 
 const DetailPage = ({ detail }: any) => {
-    return <>
-        <Seo title={detail.title}
-            contents={detail.content.replace(/(<([^>]+)>)/gi, "").substring(0, 50)} />
-        <MainLayout header={<HeaderContainer />} home={<DetailContainer detail={detail}/>} footer={<FooterContainer />} />
+  return (
+    <>
+      <Seo
+        title={detail.title}
+        contents={detail.content.replace(/(<([^>]+)>)/gi, "").substring(0, 50)}
+      />
+      <MainLayout
+        header={<HeaderContainer />}
+        home={<DetailContainer detail={detail} />}
+        footer={<FooterContainer />}
+      />
     </>
-
-}
+  );
+};
 export default DetailPage;
 
 export const getServerSideProps: GetServerSideProps = async (props) => {
-    service.defaults.headers.common["userId"] = props.req.cookies.userId
-    const id = Number(props.query.id);
-    const { data } = await selectIssue(id);
-    return {
-        props: {
-            detail: data,
-        },
-    };
+  if (props.req.cookies.userId) {
+    service.defaults.headers.common["userId"] = props.req.cookies.userId;
+  }
+  const id = Number(props.query.id);
+  const { data } = await selectIssue(id);
+  return {
+    props: {
+      detail: data,
+    },
+  };
 };

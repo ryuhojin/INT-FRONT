@@ -1,5 +1,3 @@
-import { useRef, useState } from "react";
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Button from "../common/Button";
 import TipTap from "../common/TipTap";
