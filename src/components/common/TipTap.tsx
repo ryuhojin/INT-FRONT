@@ -10,7 +10,7 @@ import TextStyle from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import lowlight from 'lowlight'
-import React from "react";
+import React, { useEffect } from "react";
 
 
 
@@ -24,6 +24,7 @@ const EditorStyle = styled.div`
 
 
 const Tiptap = (props: any) => {
+
   const editor = useEditor({
     extensions: [StarterKit, Underline, Blockquote, TextStyle, Color, CodeBlockLowlight.configure({
       lowlight,
@@ -31,6 +32,9 @@ const Tiptap = (props: any) => {
     content: props.content,
     editable: props.isEditable,
   });
+  useEffect(() => {
+    editor && editor.commands.setContent(String(props.content));
+  }, [props.content])
   if (props.mode === "editor") {
     return <EditorStyle >
       <TipTapMenu editor={editor} />
@@ -43,4 +47,4 @@ const Tiptap = (props: any) => {
   }
 };
 
-export default Tiptap;
+export default React.memo(Tiptap);

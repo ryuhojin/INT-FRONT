@@ -26,6 +26,7 @@ const MenuStyle = styled.div`
         ${(props: { isOpen: boolean }) =>
         props.isOpen &&
         css`display:flex;`}
+        z-index:99;
         animation-duration: 0.25s;
         animation-timing-function: ease-out;
         animation-name: ${fadeIn};

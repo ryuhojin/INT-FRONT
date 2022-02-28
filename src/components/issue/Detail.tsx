@@ -5,6 +5,7 @@ import { RiChatFollowUpLine } from "react-icons/ri";
 import Button from "../common/Button";
 import Router from "next/router";
 import React, { useState } from "react";
+import CommentList from "./CommentList";
 const DetailStyle = styled.div`
   height: 100%;
   display: flex;
@@ -62,22 +63,7 @@ const SolutionStyle = styled.div`
     font-size: 0.8rem;
   }
 `;
-const CommentStyle = styled.div`
-  margin-top: 0.5rem;
-  textarea {
-    width: -webkit-fill-available;
-  }
-`;
-const ReplyStyle = styled.div`
-  p {
-    font-size: 0.7rem;
-  }
-  .flex-between {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-  }
-`;
+
 const Detail = ({
   detail,
   user,
@@ -88,16 +74,21 @@ const Detail = ({
   delSolution,
   updSolution,
   recSolution,
+  addComment,
+  delComment,
+  updComment,
+  delIssue,
+  updIssue,
+  openDialog,
   editorRef,
 }: any) => {
   const isIssueWriter = user ? user.userId == detail.developer.userId : false;
-  console.log(detail);
   return (
     <DetailStyle>
       <DetailTitleStyle>
         <h2
           style={{ cursor: "pointer", margin: "2rem 0" }}
-          onClick={() => Router.back()}
+          onClick={() => Router.push('/issue/index2')}
         >
           ← 뒤로가기
         </h2>
@@ -107,6 +98,17 @@ const Detail = ({
           <span>
             {detail.modifiedDate.substring(0, 10).replace(/-/gi, ".")}
           </span>
+          {
+            isIssueWriter ?
+              <>
+                <span style={{ color: 'gray' }}>&nbsp;
+                  <span style={{ cursor: 'pointer' }} onClick={() => updIssue(detail)}>수정</span>
+                  &nbsp;·&nbsp;
+                  <span style={{ cursor: 'pointer' }} onClick={() => delIssue(detail.id)}>삭제</span>
+                </span>
+              </> :
+              <></>
+          }
         </span>
         <br />
       </DetailTitleStyle>
@@ -163,22 +165,25 @@ const Detail = ({
         <h4>{detail.developer.introduction}</h4>
       </DetailProfileStyle>
       <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
-      <h3 style={{ margin: "0.5rem 0 1rem 0" }}>SOLUTION</h3>
-      <TipTap
-        isEditable={true}
-        height="150px"
-        mode="editor"
-        editorRef={editorRef}
-      />
-      <Button fullWidth size="medium" onClick={addSolution}>
-        솔루션 등록
-      </Button>
+      {user ? <>
+        <h3 style={{ margin: "0.5rem 0 1rem 0" }}>SOLUTION</h3>
+        <TipTap
+          isEditable={true}
+          height="150px"
+          mode="editor"
+          editorRef={editorRef}
+        />
+        <Button fullWidth size="medium" onClick={addSolution}>
+          솔루션 등록
+        </Button>
+      </> : <></>}
       {solutions &&
         solutions.map((value: any, index: any) => {
           return (
-            <React.Fragment key={index}>
+            <>
               <SolutionStyle>
                 <TipTap
+                  key={index}
                   isEditable={false}
                   height="100%"
                   mode="reader"
@@ -221,60 +226,16 @@ const Detail = ({
                 <h5 style={{ textAlign: "center", margin: "0.2rem 0" }}>
                   최종 수정 시간 : {value.modifiedDate}
                 </h5>
-                <p
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    fontSize: "0.8rem",
-                    margin: "0.2rem 0",
-                  }}
-                >
-                  <span>
-                    {user && user.userId === value.developer.userId ? (
-                      <>
-                        <span style={{ cursor: "pointer" }}>수정</span>
-                        &nbsp;
-                        <span
-                          style={{ cursor: "pointer", color: "oragne" }}
-                          onClick={() => {
-                            delSolution(value.id);
-                          }}
-                        >
-                          삭제
-                        </span>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </span>
-                  <span>댓글 ▼</span>
-                </p>
-                <CommentStyle>
-                  <textarea />
-                  <Button style={{ marginTop: "0.2rem" }} fullWidth>
-                    이슈 등록
-                  </Button>
-                  {value.comment &&
-                    value.comment.map((value: any, index: any) => {
-                      return (
-                        <>
-                          <ReplyStyle key={index}>
-                            <p>{value.content}</p>
-                            <p className="flex-between">
-                              <span>{value.developer.name}</span>
-                              <span>
-                                {value.modifiedDate
-                                  .substring(0, 10)
-                                  .replace(/-/gi, ".")}
-                              </span>
-                            </p>
-                          </ReplyStyle>
-                        </>
-                      );
-                    })}
-                </CommentStyle>
+                <CommentList
+                  user={user}
+                  value={value}
+                  addComment={addComment}
+                  delComment={delComment}
+                  updComment={updComment}
+                  delSolution={delSolution}
+                  openDialog={openDialog} />
               </SolutionStyle>
-            </React.Fragment>
+            </>
           );
         })}
       <br />

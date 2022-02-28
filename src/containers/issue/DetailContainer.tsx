@@ -1,3 +1,5 @@
+import { createComment, deleteComment, updateComment } from "api/modules/comment";
+import { deleteIssue } from "api/modules/issue";
 import {
   adobtSolution,
   createSolution,
@@ -8,17 +10,23 @@ import {
   updateSolution,
 } from "api/modules/solution";
 import { followUser } from "api/modules/user";
+import Router from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import Dialog from "src/components/common/Dialog";
+import TipTap from "src/components/common/TipTap";
 import Detail from "src/components/issue/Detail";
-import { authAtom } from "store/atom";
+import { authAtom, toggleAtom } from "store/atom";
 // TODO
 // 솔루션 수정 (팝업으로 구현해야됨)
-// 이슈 등록 삭제 수정 / 팔로우 구현해야됨
 const DetailContainer = ({ detail }: any) => {
   const editorRef = useRef<any>();
+  const solutionEditorRef = useRef<any>();
   const user: any = useRecoilValue(authAtom);
   const [solutionList, setSolutionList] = useState<any>(detail.solutions);
+  const setToggle = useSetRecoilState(toggleAtom)
+  const [popup, setPopup] = useState(false);
+  const [editSolution, setEditSolution] = useState({ id: 0, content: "" });
   const addSolution = async () => {
     const response = await createSolution({
       issueId: Number(detail.id),
@@ -53,14 +61,15 @@ const DetailContainer = ({ detail }: any) => {
       getSolution();
     }
   };
-  const updSolution = async (id: number, content: string) => {
+  const updSolution = async () => {
+    if (editSolution.id == 0) return;
     const response = await updateSolution({
-      id: id,
-      content: content,
+      id: editSolution.id,
+      content: solutionEditorRef.current.props.editor.getHTML(),
       docType: "TEXT",
     });
     if (response.status === 200) {
-      getSolutionById(id);
+      getSolutionById(editSolution.id);
     }
   };
 
@@ -71,32 +80,99 @@ const DetailContainer = ({ detail }: any) => {
     }
   };
   const recSolution = async (id: number) => {
-    if (Object.keys(user).length == 0) return;
+    if (!user) return;
     const response = await recommendSolution(id);
+
     if (response.status === 200) {
       getSolutionById(id);
     }
   };
   const folUser = async (userId: string) => {
-    if (Object.keys(user).length == 0) return;
+    if (!user) return;
     const response = await followUser(userId);
     if (response.status === 200) {
     }
   };
 
+  const addComment = async (id: number, content: string) => {
+    const response = await createComment({
+      solutionId: id,
+      content: content,
+    })
+    if (response.status === 200) {
+      getSolution()
+    }
+  }
+
+  const delComment = async (id: number) => {
+    const response = await deleteComment(id);
+    if (response.status === 200) {
+      getSolution()
+    }
+  }
+
+  const updComment = async (id: number, content: string) => {
+    const response = await updateComment({
+      id: id, content: content
+    });
+    if (response.status === 200) {
+      getSolution()
+    }
+  }
+  const delIssue = async (id: number) => {
+    const response = await deleteIssue(id);
+    if (response.status === 200) {
+      setToggle(true);
+      Router.push('/issue/index2')
+    }
+  }
+  const updIssue = (detail: any) => {
+    Router.push({ pathname: '/issue/update2', query: detail })
+  }
+  const EditorDialog = () => {
+    return <><br /><TipTap
+      isEditable={true}
+      height="150px"
+      mode="editor"
+      editorRef={solutionEditorRef}
+      content={editSolution.content}
+    /></>
+  }
+  const closeDialog = () => {
+    setPopup(false);
+  }
+  const openDialog = (id: number, content: string) => {
+    setEditSolution({ id: id, content: content });
+    setPopup(true);
+  }
+  const confirmDialog = () => {
+    updSolution();
+    setEditSolution({ id: 0, content: "" });
+    setPopup(false);
+  }
+
   return (
-    <Detail
-      detail={detail}
-      user={user}
-      folUser={folUser}
-      solutions={solutionList}
-      addSolution={addSolution}
-      adtSolution={adtSolution}
-      updSolution={updSolution}
-      delSolution={delSolution}
-      recSolution={recSolution}
-      editorRef={editorRef}
-    />
+    <>
+      <Dialog title="변경" visible={popup} onCancel={closeDialog} onConfirm={confirmDialog}><EditorDialog /></Dialog>
+      <Detail
+        detail={detail}
+        user={user}
+        folUser={folUser}
+        delIssue={delIssue}
+        updIssue={updIssue}
+        solutions={solutionList}
+        addSolution={addSolution}
+        adtSolution={adtSolution}
+        updSolution={updSolution}
+        delSolution={delSolution}
+        recSolution={recSolution}
+        addComment={addComment}
+        delComment={delComment}
+        updComment={updComment}
+        openDialog={openDialog}
+        editorRef={editorRef}
+      />
+    </>
   );
 };
 export default DetailContainer;
