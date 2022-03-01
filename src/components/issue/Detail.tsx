@@ -88,7 +88,7 @@ const Detail = ({
       <DetailTitleStyle>
         <h2
           style={{ cursor: "pointer", margin: "2rem 0" }}
-          onClick={() => Router.push('/issue/index2')}
+          onClick={() => Router.push("/issue/index2")}
         >
           ← 뒤로가기
         </h2>
@@ -98,17 +98,28 @@ const Detail = ({
           <span>
             {detail.modifiedDate.substring(0, 10).replace(/-/gi, ".")}
           </span>
-          {
-            isIssueWriter ?
-              <>
-                <span style={{ color: 'gray' }}>&nbsp;
-                  <span style={{ cursor: 'pointer' }} onClick={() => updIssue(detail)}>수정</span>
-                  &nbsp;·&nbsp;
-                  <span style={{ cursor: 'pointer' }} onClick={() => delIssue(detail.id)}>삭제</span>
+          {isIssueWriter ? (
+            <>
+              <span style={{ color: "gray" }}>
+                &nbsp;
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => updIssue(detail)}
+                >
+                  수정
                 </span>
-              </> :
-              <></>
-          }
+                &nbsp;·&nbsp;
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => delIssue(detail.id)}
+                >
+                  삭제
+                </span>
+              </span>
+            </>
+          ) : (
+            <></>
+          )}
         </span>
         <br />
       </DetailTitleStyle>
@@ -135,7 +146,15 @@ const Detail = ({
       <DetailProfileStyle>
         <h2>
           <span>
-            {detail.developer.name}&nbsp;
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                Router.push({ pathname: `/user/${detail.developer.name}` });
+              }}
+            >
+              {detail.developer.name}
+            </span>
+            &nbsp;
             <RiChatFollowUpLine
               style={{ cursor: "pointer" }}
               color={detail.developer.followYn ? "orange" : "black"}
@@ -165,18 +184,22 @@ const Detail = ({
         <h4>{detail.developer.introduction}</h4>
       </DetailProfileStyle>
       <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
-      {user ? <>
-        <h3 style={{ margin: "0.5rem 0 1rem 0" }}>SOLUTION</h3>
-        <TipTap
-          isEditable={true}
-          height="150px"
-          mode="editor"
-          editorRef={editorRef}
-        />
-        <Button fullWidth size="medium" onClick={addSolution}>
-          솔루션 등록
-        </Button>
-      </> : <></>}
+      {user ? (
+        <>
+          <h3 style={{ margin: "0.5rem 0 1rem 0" }}>SOLUTION</h3>
+          <TipTap
+            isEditable={true}
+            height="150px"
+            mode="editor"
+            editorRef={editorRef}
+          />
+          <Button fullWidth size="medium" onClick={addSolution}>
+            솔루션 등록
+          </Button>
+        </>
+      ) : (
+        <></>
+      )}
       {solutions &&
         solutions.map((value: any, index: any) => {
           return (
@@ -233,7 +256,8 @@ const Detail = ({
                   delComment={delComment}
                   updComment={updComment}
                   delSolution={delSolution}
-                  openDialog={openDialog} />
+                  openDialog={openDialog}
+                />
               </SolutionStyle>
             </>
           );
