@@ -1,14 +1,13 @@
-import Seo from "components/common/Seo"
+import Seo from "src/components/common/Seo";
+import FooterContainer from "src/containers/common/FooterContainer";
+import HeaderContainer from "src/containers/common/HeaderContainer";
+import UpdateContainer from "src/containers/issue/UpdateContainer"
+import MainLayout from "src/layouts/MainLayout";
 
-import HeaderContainer from "containers/base/HeaderContainer"
-import UpdateContainer from "containers/write/UpdateContainer"
-
-import NFLayout from "layouts/NFLayout"
-
-const IssueUpdatePage = (props:any) => {
+const IssueUpdatePage = () => {
     return <>
         <Seo title="이슈 수정" />
-        <NFLayout header={<HeaderContainer />} body={<UpdateContainer />} />
-    </>
+        <MainLayout header={<HeaderContainer />} home={<UpdateContainer />} footer={<FooterContainer />} />
+    </>;
 }
-export default IssueUpdatePage
+export default IssueUpdatePage;

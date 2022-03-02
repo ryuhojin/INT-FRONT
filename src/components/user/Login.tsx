@@ -36,14 +36,19 @@ const LoginStyle = styled.div`
     }
   
 `;
-const Login = ({ username, password, onChangeUsername, onChangePassword, onSubmit, onGithubLogin }: any) => {
+const Login = ({ username, password, onChangeUsername, onChangePassword, onSubmit, onSignUp }: any) => {
     return <LoginStyle>
         <form onSubmit={onSubmit}>
             <input type="text" value={username} onChange={onChangeUsername} placeholder="아이디를 입력해주세요." />
             <input type="password" value={password} onChange={onChangePassword} autoComplete="false" placeholder="비밀번호를 입력해주세요." />
-            <Button fullWidth style={{ 'margin-top': '1.5rem' }}>로그인</Button>
+            <Button fullWidth style={{ marginTop : '1.5rem' }}>로그인</Button>
         </form>
-        <Button onClick={onGithubLogin} fullWidth style={{ 'margin-top': '0.5rem' }}>GITHUB 로그인</Button>
+        <Button fullWidth style={{  marginTop: '0.5rem' }} onClick={() => {
+            window.location.href =
+                "http://3.20.158.73:8080/oauth2/authorization/github";
+        }}>GITHUB 로그인</Button>
+        <br />
+        <span><span style={{ cursor: 'pointer' }} onClick={onSignUp}>회원가입</span>&nbsp;/&nbsp;<span style={{ cursor: 'pointer' }}>비밀번호 찾기</span></span>
     </LoginStyle >
 }
 export default Login;

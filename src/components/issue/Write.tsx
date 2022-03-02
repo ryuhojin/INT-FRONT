@@ -38,7 +38,7 @@ const DetailTagStyle = styled.div`
     }
 `
 
-const Write = ({ editorRef, onIssueWrite, title, setTitle, tag, setChangeTag, setDeleteTag }: any) => {
+const Write = ({ editorRef, onIssueWrite, title, setTitle, tag, setChangeTag, setDeleteTag, onIssueWriteTemp }: any) => {
     return <WriteStyle>
         <h2>제목</h2>
         <input type="text" placeholder="제목을 입력해주세요" value={title} onChange={(e: any) => { e.preventDefault(); setTitle(e.target.value) }} className="title" />
@@ -49,9 +49,10 @@ const Write = ({ editorRef, onIssueWrite, title, setTitle, tag, setChangeTag, se
                 return <span onClick={() => setDeleteTag(index)} key={index}># {value}</span>
             })}
         </DetailTagStyle>
-        <h2 style={{ marginBottom: '1rem', marginTop:'0.5rem' }}>내용</h2>
+        <h2 style={{ marginBottom: '1rem', marginTop: '0.5rem' }}>내용</h2>
         <TipTap isEditable={true} height="300px" mode="editor" editorRef={editorRef} />
         <Button fullWidth onClick={onIssueWrite}>이슈 등록</Button>
+        <Button fullWidth onClick={onIssueWriteTemp}>임시 저장</Button>
         <br />
     </WriteStyle>
 }

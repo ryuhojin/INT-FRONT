@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 
-import Seo from "components/common/Seo";
+import Seo from "src/components/common/Seo";
 import HeaderContainer from "src/containers/common/HeaderContainer";
 import FooterContainer from "src/containers/common/FooterContainer";
 import MainLayout from "src/layouts/MainLayout";
 import UserInfoContainer from "src/containers/user/UserInfoContainer";
 
-const UserInfoIdPage = () => {
+const UserInfoPage = () => {
   const { query } = useRouter();
 
   return (
@@ -14,10 +14,10 @@ const UserInfoIdPage = () => {
       <Seo title="유저 정보" />
       <MainLayout
         header={<HeaderContainer />}
-        home={<UserInfoContainer id={String(query.id)} />}
+        home={<UserInfoContainer id={query.id} />}
         footer={<FooterContainer />}
       />
     </>
   );
 };
-export default UserInfoIdPage;
+export default UserInfoPage;

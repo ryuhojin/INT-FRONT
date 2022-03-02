@@ -15,7 +15,7 @@ const LoginContainer = () => {
 
     useEffect(() => {
         if (!authentication) return;
-        Router.push('/index2')
+        Router.push('/')
     }, [])
 
     const onChangeUsername = (e: any) => {
@@ -34,16 +34,16 @@ const LoginContainer = () => {
             message.show("로그인 정보를 다시 확인해주세요.")
         }
     }
-    const onGithubLogin = (e: any) => {
-        e.preventDefault();
-        message.show("미구현")
+    const onSignUp = () => {
+        Router.push('/user/signup');
     }
+
 
     return <Login username={username}
         password={password}
         onChangeUsername={onChangeUsername}
         onChangePassword={onChangePassword}
         onSubmit={onSubmit}
-        onGithubLogin={onGithubLogin} />
+        onSignUp={onSignUp} />
 }
 export default LoginContainer;

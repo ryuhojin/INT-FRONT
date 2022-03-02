@@ -53,7 +53,7 @@ const EditContainer = () => {
         
     }
     const onCancel = () => {
-        Router.push('/user/info2')
+        Router.push('/user/info')
     }
     return <Edit user={userState} onEdit={onEdit} editUser={setEditUser} onCancel={onCancel} />
 }

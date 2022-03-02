@@ -17,8 +17,6 @@ import Dialog from "src/components/common/Dialog";
 import TipTap from "src/components/common/TipTap";
 import Detail from "src/components/issue/Detail";
 import { authAtom, toggleAtom } from "store/atom";
-// TODO
-// 솔루션 수정 (팝업으로 구현해야됨)
 const DetailContainer = ({ detail }: any) => {
   const editorRef = useRef<any>();
   const solutionEditorRef = useRef<any>();
@@ -123,11 +121,11 @@ const DetailContainer = ({ detail }: any) => {
     const response = await deleteIssue(id);
     if (response.status === 200) {
       setToggle(true);
-      Router.push('/issue/index2')
+      Router.push('/issue')
     }
   }
   const updIssue = (detail: any) => {
-    Router.push({ pathname: '/issue/update2', query: detail })
+    Router.push({ pathname: '/issue/update', query: detail })
   }
   const EditorDialog = () => {
     return <><br /><TipTap

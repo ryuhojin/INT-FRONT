@@ -1,14 +1,14 @@
 import { GetServerSideProps } from "next";
 import service from "api";
 import { selectIssue } from "api/modules/issue";
-import Seo from "components/common/Seo";
+import Seo from "src/components/common/Seo";
 
 import FooterContainer from "src/containers/common/FooterContainer";
 import HeaderContainer from "src/containers/common/HeaderContainer";
 import DetailContainer from "src/containers/issue/DetailContainer";
 import MainLayout from "src/layouts/MainLayout";
 
-const DetailPage = ({ detail }: any) => {
+const IssueDetailPage = ({ detail }: any) => {
   return (
     <>
       <Seo
@@ -23,7 +23,7 @@ const DetailPage = ({ detail }: any) => {
     </>
   );
 };
-export default DetailPage;
+export default IssueDetailPage;
 
 export const getServerSideProps: GetServerSideProps = async (props) => {
   if (props.req.cookies.userId) {

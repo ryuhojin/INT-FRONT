@@ -68,7 +68,7 @@ const Menu = () => {
     const onLogout = () => {
         auth.signout();
         closeMenu();
-        Router.push('/index2')
+        Router.push('/')
     }
     /**
      * @name onStatus
@@ -76,7 +76,7 @@ const Menu = () => {
      */
     const onStatus = () => {
         closeMenu();
-        Router.push('/user/info2')
+        Router.push('/user/info')
     }
     /**
      * @name onWrite
@@ -84,7 +84,7 @@ const Menu = () => {
      */
     const onWrite = () => {
         closeMenu();
-        Router.push('/issue/write2')
+        Router.push('/issue/write')
     }
     return <MenuStyle isOpen={state}>
         <div onClick={closeMenu}><MdClose size={30} /></div>

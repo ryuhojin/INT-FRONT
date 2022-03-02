@@ -88,7 +88,7 @@ const Detail = ({
       <DetailTitleStyle>
         <h2
           style={{ cursor: "pointer", margin: "2rem 0" }}
-          onClick={() => Router.push("/issue/index2")}
+          onClick={() => Router.push("/issue")}
         >
           ← 뒤로가기
         </h2>

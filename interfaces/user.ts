@@ -9,4 +9,5 @@ export interface UserInterface {
     pictureUrl?: string;
     point?: number;
     popularity?: number;
+    groupName?: string;
 }

@@ -1,14 +1,13 @@
-import Seo from "components/common/Seo";
+import Seo from "src/components/common/Seo";
+import FooterContainer from "src/containers/common/FooterContainer";
+import HeaderContainer from "src/containers/common/HeaderContainer";
+import HomeContainer from "src/containers/home/HomeContainer";
+import MainLayout from "src/layouts/MainLayout";
 
-import HeaderContainer from "containers/base/HeaderContainer";
-import MainContainer from "containers/main/MainContainer";
-
-import BaseLayout from "layouts/BaseLayout";
-
-const MainPage = () => {
-  return <>
-    <Seo title="Main" />
-    <BaseLayout header={<HeaderContainer />} body={<MainContainer />} />
-  </>
+const HomePage = () => {
+    return <>
+        <Seo title="홈"></Seo>
+        <MainLayout header={<HeaderContainer />} home={<HomeContainer />} footer={<FooterContainer />} />
+    </>
 }
-export default MainPage;
+export default HomePage;

@@ -56,7 +56,7 @@ const MyInfoStyle = styled.div`
 `;
 
 
-const Myinfo = ({ onEdit, user }: { onEdit: any, user: any }) => {
+const Myinfo = ({ onEdit, onDelete, user }: { onEdit: any, onDelete: any, user: any }) => {
     return <MyInfoStyle>
         <h1>내 정보</h1>
         <div>
@@ -112,6 +112,7 @@ const Myinfo = ({ onEdit, user }: { onEdit: any, user: any }) => {
                 </tbody>
             </table>
             <Button fullWidth onClick={onEdit}>수정</Button>
+            <Button fullWidth onClick={() => onDelete(user?.userId)}>탈퇴</Button>
             <br />
         </div>
     </MyInfoStyle>

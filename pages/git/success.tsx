@@ -2,7 +2,7 @@ import Router, { useRouter } from "next/router";
 import { useEffect } from "react";
 import { cookie } from "utils/common";
 import { useAuth } from "utils/auth";
-const Success = () => {
+const GitLoginSuccess = () => {
   const { query } = useRouter();
   const auth = useAuth();
   useEffect(() => {
@@ -14,4 +14,4 @@ const Success = () => {
   }, [query.token]);
   return <></>;
 };
-export default Success;
+export default GitLoginSuccess;

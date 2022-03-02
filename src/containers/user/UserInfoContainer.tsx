@@ -6,7 +6,7 @@ const UserInfoContainer = ({ id }: any) => {
   const [user, setUser] = useState<any>();
 
   const selectUser = async () => {
-    if (id === 'undefined') return;
+    if (!id) return;
     const response = await getUserInfo(id);
     if (response.status == 200) {
       setUser(response.data);

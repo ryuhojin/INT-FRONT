@@ -1,14 +1,14 @@
-import Seo from "components/common/Seo";
+import Seo from "src/components/common/Seo";
+import MainLayout from "src/layouts/MainLayout";
+import HeaderContainer from "src/containers/common/HeaderContainer";
+import FooterContainer from "src/containers/common/FooterContainer";
 
-import HeaderContainer from "containers/base/HeaderContainer";
-import MyInfoContainer from "containers/user/MyInfoContainer";
+import MyinfoContainer from "src/containers/user/MyinfoContainer";
 
-import NFLayout from "layouts/NFLayout";
-
-const UserInfoPage = () => {
+const MyInfoPage = () => {
     return <>
         <Seo title="내 정보" />
-        <NFLayout header={<HeaderContainer />} body={<MyInfoContainer />} />
-    </>
+        <MainLayout header={<HeaderContainer />} home={<MyinfoContainer />} footer={<FooterContainer />} />
+    </>;
 }
-export default UserInfoPage;
+export default MyInfoPage;

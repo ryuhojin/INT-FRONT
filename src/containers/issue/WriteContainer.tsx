@@ -1,4 +1,4 @@
-import { createIssue } from "api/modules/issue";
+import { createIssue, createTempIssue } from "api/modules/issue";
 import Router from "next/router";
 import { useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -25,9 +25,20 @@ const WriteContainer = () => {
         });
         if (response.status === 200) {
             setToggle(true);
-            Router.push("/issue/index2");
+            Router.push("/issue");
         }
     }
+    const onIssueWriteTemp = async () => {
+        const response = await createTempIssue({
+            title: title,
+            content: editorRef.current.props.editor.getHTML(),
+            docType: "TEXT",
+            hashtags: tag,
+        });
+        if (response.status === 200) {
+            message.show("임시 저장되었습니다.")
+        }
+    };
     const setChagneTag = (e: any) => {
         if (tag.length > 10) {
             e.target.value = "";
@@ -53,6 +64,6 @@ const WriteContainer = () => {
         setTag(tag.filter((value: string, idx: any) => idx !== index));
     };
 
-    return <Write editorRef={editorRef} tag={tag} setChangeTag={setChagneTag} setDeleteTag={setDeleteTag} title={title} setTitle={setTitle} onIssueWrite={onIssueWrite} />
+    return <Write editorRef={editorRef} tag={tag} setChangeTag={setChagneTag} setDeleteTag={setDeleteTag} title={title} setTitle={setTitle} onIssueWrite={onIssueWrite} onIssueWriteTemp={onIssueWriteTemp} />
 }
 export default WriteContainer;
