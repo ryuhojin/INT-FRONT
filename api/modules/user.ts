@@ -40,3 +40,12 @@ export async function checkName(name: string) {
 export async function followUser(userId: string) {
     return await service.put(`developer/follow/${userId}`)
 }
+export async function callCert(userId: string) {
+    return await service.get(`auth/sendAuthMail/${userId}`)
+}
+export async function checkCert(userId: string, authNum: string) {
+    return await service.get(`auth/checkAuthNum/${userId}?authNum=${authNum}`)
+}
+export async function changWithCert(userId: string, authNum: string, password: string) {
+    return await service.put('auth/password', { userId: userId, password: password, authNum: authNum });
+}

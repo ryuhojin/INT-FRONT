@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { dialogAtom } from "store/atom";
 import styled, { keyframes, css } from "styled-components";
 import Button from "./Button";
 const fadeIn = keyframes`
@@ -49,14 +51,17 @@ const DarkBackground = styled.div`
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
   ${(props: { disappear: boolean }) =>
-        props.disappear &&
-        css`
+    props.disappear &&
+    css`
       animation-name: ${fadeOut};
     `}
 `;
 
 const DialogBlock = styled.div`
-  width: 80%;
+  width: 40%;
+  @media only screen and (max-width: 550px) {
+      width:80%;
+  }
   padding: 1.5rem;
   background: white;
   border-radius: 2px;
@@ -74,8 +79,8 @@ const DialogBlock = styled.div`
   animation-fill-mode: forwards;
 
   ${(props: { disappear: boolean }) =>
-        props.disappear &&
-        css`
+    props.disappear &&
+    css`
       animation-name: ${slideDown};
     `}
 `;
@@ -92,45 +97,46 @@ const ShortMarginButton = styled(Button)`
   }
 `;
 const Dialog = ({
-    title,
-    children,
-    confirmText,
-    cancelText,
-    onConfirm,
-    onCancel,
-    visible,
+  title,
+  children,
+  confirmText,
+  cancelText,
+  onConfirm,
+  onCancel,
+  visible,
 }: any) => {
-    const [animate, setAnimate] = useState(false);
-    const [localVisible, setLocalVisible] = useState(visible);
+  const [animate, setAnimate] = useState(false);
+  const [localVisible, setLocalVisible] = useState(visible);
 
-    useEffect(() => {
-        if (localVisible && !visible) {
-            setAnimate(true);
-            setTimeout(() => setAnimate(false), 250);
-        }
-        setLocalVisible(visible);
-    }, [localVisible, visible]);
+  useEffect(() => {
+    if (localVisible && !visible) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 250);
+    }
+    setLocalVisible(visible);
+  }, [localVisible, visible]);
 
-    if (!animate && !localVisible) return null;
-    return (
-        <DarkBackground disappear={!visible}>
-            <DialogBlock disappear={!visible}>
-                <h3>{title}</h3>
-                <p>{children}</p>
-                <ButtonGroup>
-                    <ShortMarginButton color="gray" onClick={onCancel}>
-                        {cancelText}
-                    </ShortMarginButton>
-                    <ShortMarginButton color="red" onClick={onConfirm}>
-                        {confirmText}
-                    </ShortMarginButton>
-                </ButtonGroup>
-            </DialogBlock>
-        </DarkBackground>
-    );
+  if (!animate && !localVisible) return null;
+  return (
+    <DarkBackground disappear={!visible}>
+      <DialogBlock disappear={!visible}>
+        <h3>{title}</h3>
+        <p>{children}</p>
+        <ButtonGroup>
+          <ShortMarginButton color="gray" onClick={onCancel}>
+            {cancelText}
+          </ShortMarginButton>
+          <ShortMarginButton color="red" onClick={onConfirm}>
+            {confirmText}
+          </ShortMarginButton>
+        </ButtonGroup>
+      </DialogBlock>
+    </DarkBackground>
+  );
 };
 Dialog.defaultProps = {
-    confirmText: "확인",
-    cancelText: "취소",
+  title: "알림",
+  confirmText: "확인",
+  cancelText: "취소",
 };
 export default Dialog;

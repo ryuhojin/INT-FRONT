@@ -38,12 +38,16 @@ const LoginContainer = () => {
         Router.push('/user/signup');
     }
 
+    const onFindPw = () => {
+        Router.push('/user/find')
+    }
 
     return <Login username={username}
         password={password}
         onChangeUsername={onChangeUsername}
         onChangePassword={onChangePassword}
         onSubmit={onSubmit}
-        onSignUp={onSignUp} />
+        onSignUp={onSignUp}
+        onFindPw={onFindPw} />
 }
 export default LoginContainer;

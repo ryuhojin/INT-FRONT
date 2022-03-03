@@ -1,16 +1,21 @@
-import { createIssue, createTempIssue } from "api/modules/issue";
+import { createIssue, createTempIssue, selectIssueTemp } from "api/modules/issue";
 import Router from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import Dialog from "src/components/common/Dialog";
 import Write from "src/components/issue/Write";
 import { messageAtom, toggleAtom } from "store/atom";
+import { useDialog } from "utils/dialog";
 import { useMessage } from "utils/message";
 
 const WriteContainer = () => {
     const editorRef = useRef<any>();
     const [title, setTitle] = useState("");
     const [tag, setTag] = useState<any>([]);
+    const [temp, setTemp] = useState<any>(null);
+    const [tempVisible, setTempVisible] = useState(false);
     const setToggle = useSetRecoilState(toggleAtom);
+    const dialog = useDialog();
     const message = useMessage();
     const onIssueWrite = async () => {
         if (!title.trim()) {
@@ -63,7 +68,29 @@ const WriteContainer = () => {
     const setDeleteTag = (index: number) => {
         setTag(tag.filter((value: string, idx: any) => idx !== index));
     };
-
-    return <Write editorRef={editorRef} tag={tag} setChangeTag={setChagneTag} setDeleteTag={setDeleteTag} title={title} setTitle={setTitle} onIssueWrite={onIssueWrite} onIssueWriteTemp={onIssueWriteTemp} />
+    useEffect(() => {
+        async function selectTemp() {
+            const response = await selectIssueTemp();
+            if (response.status == 200 && response.data != null) {
+                setTemp(response.data);
+                setTempVisible(true);
+            }
+        }
+        selectTemp();
+    }, [])
+    const onConfirmDialog = () => {
+        setTitle(temp.title)
+        editorRef.current.props.editor.commands.setContent(String(temp.content));
+        setTemp(null);
+        setTempVisible(false);
+    }
+    const onCancelDialog = () => {
+        setTemp(null);
+        setTempVisible(false);
+    }
+    return <>
+        <Dialog visible={tempVisible} onConfirm={onConfirmDialog} onCancel={onCancelDialog}>임시 저장된 이슈가 있습니다.<br />이어서 작성하시겠습니까?</Dialog>
+        <Write editorRef={editorRef} tag={tag} setChangeTag={setChagneTag} setDeleteTag={setDeleteTag} title={title} setTitle={setTitle} onIssueWrite={onIssueWrite} onIssueWriteTemp={onIssueWriteTemp} />
+    </>
 }
 export default WriteContainer;

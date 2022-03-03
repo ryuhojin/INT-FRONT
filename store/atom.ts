@@ -28,3 +28,12 @@ export const messageAtom = atom({
         isShow: false
     },
 })
+
+export const dialogAtom = atom({
+    key: "dialog",
+    default: {
+        title: "알림",
+        children: null,
+        visible: false
+    }
+})
