@@ -1,5 +1,3 @@
-import { deleteUser } from "api/modules/user";
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
 import Router from "next/router";
 import { useRecoilValue } from "recoil";
 import Myinfo from "src/components/user/MyInfo";
