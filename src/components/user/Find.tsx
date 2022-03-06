@@ -59,10 +59,8 @@ const Find = ({
     }
     return <StyledFind>
         <div>
-            <input value={userId} onChange={setUserId} disabled type="text" placeholder='고객님의 아이디를 입력해주세요.' />
             <input value={password} onChange={setPassword} type="password" placeholder='변경할 비밀번호를 입력해주세요.' />
             <input value={passwordChk} onChange={setPasswordChk} type="password" placeholder='변경할 비밀번호를 입력해주세요.(확인)' />
-            <input value={authNum} onChange={setAuthNum} type="text" placeholder='인증번호를 입력해주세요.' />
             <Button fullWidth onClick={changePassword}>확인</Button>
         </div>
     </StyledFind>
