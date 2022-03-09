@@ -12,18 +12,9 @@ export async function register(params: UserInterface) {
 export async function refresh() {
     return await service.get('common/refreshtoken');
 }
-//TODO : SigninRe 와 getLoginUser에 대한정리필요
-export async function SignRe() {
-    const { data } = await service.get('common/refreshtoken');
-    return data;
-}
 
 export async function getUserInfo(userId: string) {
     return await service.get(`developer/${userId}`)
-}
-export async function updateUserInfo(params: { userId: string, name: string, email: string, gitUrl: string, webSiteUrl: string }) {
-    const { data } = await service.put('developer', params);
-    return data;
 }
 export async function updateUser(params: { userId: string, name: string, email: string, gitUrl: string, webSiteUrl: string }) {
     return await service.put('developer', params);
