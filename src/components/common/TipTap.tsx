@@ -32,11 +32,11 @@ const Tiptap = (props: any) => {
         lowlight,
       }),
     ],
-    content: props.content || " ",
+    content: props.content ?? " ",
     editable: props.isEditable,
   });
   useEffect(() => {
-    editor && editor.commands.setContent(String(props.content));
+    editor && editor.commands.setContent(String(props.content ?? " "));
   }, [props.content]);
   if (props.mode === "editor") {
     return (
