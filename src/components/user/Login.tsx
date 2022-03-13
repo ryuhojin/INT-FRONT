@@ -45,7 +45,9 @@ const Login = ({ username, password, onChangeUsername, onChangePassword, onSubmi
         </form>
         <Button fullWidth style={{ marginTop: '0.5rem' }} onClick={() => {
             window.location.href =
-                "https://notworking-api.link/oauth2/authorization/github";
+            "http://52.79.72.35:8080/oauth2/authorization/github";
+            //"http://localhost:8080/oauth2/authorization/github";
+            //"https://notworking-api.link/oauth2/authorization/github";
         }}>GITHUB 로그인</Button>
         <br />
         <span><span style={{ cursor: 'pointer' }} onClick={onSignUp}>회원가입</span>&nbsp;/&nbsp;<span style={{ cursor: 'pointer' }} onClick={onFindPw}>비밀번호 찾기</span></span>
