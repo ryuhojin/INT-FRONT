@@ -1,4 +1,8 @@
-import { createComment, deleteComment, updateComment } from "api/modules/comment";
+import {
+  createComment,
+  deleteComment,
+  updateComment,
+} from "api/modules/comment";
 import { deleteIssue } from "api/modules/issue";
 import {
   adobtSolution,
@@ -22,7 +26,7 @@ const DetailContainer = ({ detail }: any) => {
   const solutionEditorRef = useRef<any>();
   const user: any = useRecoilValue(authAtom);
   const [solutionList, setSolutionList] = useState<any>(detail.solutions);
-  const setToggle = useSetRecoilState(toggleAtom)
+  const setToggle = useSetRecoilState(toggleAtom);
   const [popup, setPopup] = useState(false);
   const [editSolution, setEditSolution] = useState({ id: 0, content: "" });
   const addSolution = async () => {
@@ -96,62 +100,75 @@ const DetailContainer = ({ detail }: any) => {
     const response = await createComment({
       solutionId: id,
       content: content,
-    })
+    });
     if (response.status === 200) {
-      getSolution()
+      getSolution();
     }
-  }
+  };
 
   const delComment = async (id: number) => {
     const response = await deleteComment(id);
     if (response.status === 200) {
-      getSolution()
+      getSolution();
     }
-  }
+  };
 
   const updComment = async (id: number, content: string) => {
     const response = await updateComment({
-      id: id, content: content
+      id: id,
+      content: content,
     });
     if (response.status === 200) {
-      getSolution()
+      getSolution();
     }
-  }
+  };
   const delIssue = async (id: number) => {
     const response = await deleteIssue(id);
     if (response.status === 200) {
       setToggle(true);
-      Router.push('/issue')
+      Router.push("/issue");
     }
-  }
+  };
   const updIssue = (detail: any) => {
-    Router.push({ pathname: '/issue/update', query: detail })
-  }
+    Router.push({ pathname: "/issue/update", query: detail });
+  };
   const EditorDialog = () => {
-    return <><br /><TipTap
-      isEditable={true}
-      height="150px"
-      mode="editor"
-      editorRef={solutionEditorRef}
-      content={editSolution.content}
-    /></>
-  }
+    return (
+      <>
+        <br />
+        <TipTap
+          isEditable={true}
+          height="150px"
+          mode="editor"
+          editorRef={solutionEditorRef}
+          content={editSolution.content}
+        />
+      </>
+    );
+  };
   const closeDialog = () => {
     setPopup(false);
-  }
+  };
   const openDialog = (id: number, content: string) => {
     setEditSolution({ id: id, content: content });
     setPopup(true);
-  }
+  };
   const confirmDialog = () => {
     updSolution();
     setEditSolution({ id: 0, content: "" });
     setPopup(false);
-  }
+  };
 
   return (
     <>
-      <Dialog title="변경" visible={popup} onCancel={closeDialog} onConfirm={confirmDialog}><EditorDialog /></Dialog>
+      <Dialog
+        title="변경"
+        visible={popup}
+        onCancel={closeDialog}
+        onConfirm={confirmDialog}
+      >
+        <EditorDialog />
+      </Dialog>
       <Detail
         detail={detail}
         user={user}

@@ -66,6 +66,6 @@ export function useAuth() {
     signre,
     deluser,
     uptuser,
-    isLoggedIn
+    isLoggedIn,
   };
 }

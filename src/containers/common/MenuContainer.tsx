@@ -1,6 +1,6 @@
 import Menu from "src/components/common/Menu";
 
 const MenuContainer = () => {
-    return <Menu />;
-}
+  return <Menu />;
+};
 export default MenuContainer;

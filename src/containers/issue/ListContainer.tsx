@@ -9,45 +9,57 @@ import List from "src/components/issue/List";
 import { searchAtom, toggleAtom } from "store/atom";
 
 const ListContainer = () => {
-    const [search, setSearch] = useRecoilState(searchAtom);
-    const [toggle, setToggle] = useRecoilState(toggleAtom);
+  const [search, setSearch] = useRecoilState(searchAtom);
+  const [toggle, setToggle] = useRecoilState(toggleAtom);
 
-    useEffect(() => {
-        if (toggle) {
-            setToggle(false);
-        }
-    })
+  useEffect(() => {
+    if (toggle) {
+      setToggle(false);
+    }
+  });
 
-
-    const {
-        status,
-        data,
-        fetchNextPage,
-        hasNextPage,
-        isFetchingNextPage
-    } = useInfiniteQuery(
-        ['issuelist', useDebounce(search, 1000), toggle],
-        async ({ pageParam = { query: search, page: 0 } }) => {
-            return await getIssues({ query: pageParam.query, page: pageParam.page })
+  const { status, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery(
+      ["issuelist", useDebounce(search, 1000), toggle],
+      async ({ pageParam = { query: search, page: 0 } }) => {
+        return await getIssues({
+          query: pageParam.query,
+          page: pageParam.page,
+        });
+      },
+      {
+        getNextPageParam: (lastPage) => {
+          return lastPage.nextId
+            ? { query: search, page: lastPage.nextId }
+            : false;
         },
-        {
-            getNextPageParam: lastPage => {
-                return lastPage.nextId ? { query: search, page: lastPage.nextId } : false
-            },
-            refetchOnMount: false,
-            refetchOnWindowFocus: false,
-        }
-    )
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+      }
+    );
 
-    const onDetail = (id: number) => Router.push(`/issue/${id}`)
+  const onDetail = (id: number) => Router.push(`/issue/${id}`);
 
-    const hasMoreChecker = useRef(null);
+  const hasMoreChecker = useRef(null);
 
-    useIntersectionObserver({
-        target: hasMoreChecker,
-        onIntersect: fetchNextPage,
-        enabled: !!hasNextPage,
-    })
-    return <List search={search} isFetchingNextPage={isFetchingNextPage} hasMoreChecker={hasMoreChecker} setSearch={(e: any) => { e.preventDefault(); setSearch(e.target.value) }} status={status} data={data} onDetail={onDetail} />
-}
+  useIntersectionObserver({
+    target: hasMoreChecker,
+    onIntersect: fetchNextPage,
+    enabled: !!hasNextPage,
+  });
+  return (
+    <List
+      search={search}
+      isFetchingNextPage={isFetchingNextPage}
+      hasMoreChecker={hasMoreChecker}
+      setSearch={(e: any) => {
+        e.preventDefault();
+        setSearch(e.target.value);
+      }}
+      status={status}
+      data={data}
+      onDetail={onDetail}
+    />
+  );
+};
 export default ListContainer;

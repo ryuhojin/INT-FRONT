@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { EventHandler, ReactEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import Login from "src/components/user/Login";
 import { authAtom } from "store/atom";

@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import Dialog from "src/components/common/Dialog";
 import Write from "src/components/issue/Write";
-import { messageAtom, toggleAtom } from "store/atom";
+import { toggleAtom } from "store/atom";
 import { useDialog } from "utils/dialog";
 import { useMessage } from "utils/message";
 
