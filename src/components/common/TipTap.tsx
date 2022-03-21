@@ -32,7 +32,7 @@ const Tiptap = (props: any) => {
         lowlight,
       }),
     ],
-    content: "",
+    content: props.content ?? "",
     editable: props.isEditable,
   });
   useEffect(() => {
