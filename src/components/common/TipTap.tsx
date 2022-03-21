@@ -32,14 +32,12 @@ const Tiptap = (props: any) => {
         lowlight,
       }),
     ],
-    content: props.content ?? "",
+    content: props.content,
     editable: props.isEditable,
   });
   useEffect(() => {
-    if (!editor) return;
-    if (!props.content) return;
-    editor.commands.setContent(String(props.content));
-  }, [props.content]);
+    editor && editor.commands.setContent(String(props.content));
+  }, [editor, props.content]);
   if (props.mode === "editor") {
     return (
       <EditorStyle>
