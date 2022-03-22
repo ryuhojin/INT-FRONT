@@ -9,7 +9,7 @@ import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import lowlight from "lowlight";
 import TipTapMenu from "../common/TipTapMenu";
 import React from "react";
-const StyledEditor = styled.div`
+const StyledIssueEditor = styled.div`
   border: 1px solid black;
 `;
 
@@ -18,6 +18,7 @@ const IssueEditor = (props: any) => {
     extensions: [
       StarterKit,
       Underline,
+      Blockquote,
       TextStyle,
       Color,
       CodeBlockLowlight.configure({
@@ -28,7 +29,7 @@ const IssueEditor = (props: any) => {
     editable: true,
   });
   return (
-    <StyledEditor>
+    <StyledIssueEditor>
       <TipTapMenu editor={editor} />
       <EditorContent
         editor={editor}
@@ -40,7 +41,7 @@ const IssueEditor = (props: any) => {
         ref={props.editorRef}
         className="content"
       />
-    </StyledEditor>
+    </StyledIssueEditor>
   );
 };
 export default React.memo(IssueEditor);

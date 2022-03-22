@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import Dialog from "src/components/common/Dialog";
 import TipTap from "src/components/common/TipTap";
+import SolutionEditor from "src/components/editor/SolutionEditor";
 import Detail from "src/components/issue/Detail";
 import { authAtom, toggleAtom } from "store/atom";
 const DetailContainer = ({ detail }: any) => {
@@ -136,13 +137,18 @@ const DetailContainer = ({ detail }: any) => {
     return (
       <>
         <br />
-        <TipTap
+        <SolutionEditor
+          height="150px"
+          editorRef={solutionEditorRef}
+          content={editSolution.content}
+        />
+        {/* <TipTap
           isEditable={true}
           height="150px"
           mode="editor"
           editorRef={solutionEditorRef}
           content={editSolution.content}
-        />
+        /> */}
       </>
     );
   };

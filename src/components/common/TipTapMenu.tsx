@@ -6,7 +6,7 @@ import {
   MdFormatStrikethrough,
   MdFormatListBulleted,
   MdFormatListNumbered,
-  // MdFormatQuote,
+  MdFormatQuote,
   MdCode,
   MdHorizontalRule,
   MdUndo,
@@ -139,12 +139,12 @@ const TipTapMenu = ({ editor }: any) => {
         }
       />
       &nbsp;&nbsp;&nbsp;
-      {/* <MdFormatQuote
+      <MdFormatQuote
         size={size}
         cursor={"pointer"}
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive("blockquote") ? "is-active" : ""}
-      /> */}
+      />
       <MdCode
         size={size}
         cursor={"pointer"}

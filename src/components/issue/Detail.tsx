@@ -4,10 +4,11 @@ import { FaGithub, FaBlogger, FaRegThumbsUp } from "react-icons/fa";
 import { RiChatFollowUpLine } from "react-icons/ri";
 import Button from "../common/Button";
 import Router from "next/router";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import CommentList from "./CommentList";
 import IssueViewer from "../editor/IssueViewer";
 import SolutionViewer from "../editor/SolutionViewer";
+import IssueEditor from "../editor/IssueEditor";
 const DetailStyle = styled.div`
   height: 100%;
   display: flex;
@@ -190,12 +191,13 @@ const Detail = ({
       {user ? (
         <>
           <h3 style={{ margin: "0.5rem 0 1rem 0" }}>SOLUTION</h3>
-          <TipTap
+          {/* <TipTap
             isEditable={true}
             height="150px"
             mode="editor"
             editorRef={editorRef}
-          />
+          /> */}
+          <IssueEditor height="150px" editorRef={editorRef} />
           <Button fullWidth size="medium" onClick={addSolution}>
             솔루션 등록
           </Button>
@@ -206,10 +208,9 @@ const Detail = ({
       {solutions &&
         solutions.map((value: any, index: any) => {
           return (
-            <>
-              <SolutionStyle>
+            <React.Fragment key={index}>
+              <SolutionStyle >
                 <SolutionViewer
-                  key={index}
                   height="100%"
                   content={value.content}
                 />
@@ -267,7 +268,7 @@ const Detail = ({
                   openDialog={openDialog}
                 />
               </SolutionStyle>
-            </>
+            </React.Fragment>
           );
         })}
       <br />
