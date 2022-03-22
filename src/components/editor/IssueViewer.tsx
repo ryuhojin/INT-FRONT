@@ -18,7 +18,6 @@ const IssueViewer = (props: any) => {
     extensions: [
       StarterKit,
       Underline,
-      Blockquote,
       TextStyle,
       Color,
       CodeBlockLowlight.configure({

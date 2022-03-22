@@ -7,6 +7,7 @@ import Router from "next/router";
 import React, { useState } from "react";
 import CommentList from "./CommentList";
 import IssueViewer from "../editor/IssueViewer";
+import SolutionViewer from "../editor/SolutionViewer";
 const DetailStyle = styled.div`
   height: 100%;
   display: flex;
@@ -207,13 +208,18 @@ const Detail = ({
           return (
             <>
               <SolutionStyle>
-                <TipTap
+                <SolutionViewer
+                  key={index}
+                  height="100%"
+                  content={value.content}
+                />
+                {/* <TipTap
                   key={index}
                   isEditable={false}
                   height="100%"
                   mode="reader"
                   content={value.content}
-                />
+                /> */}
                 <p className="flex-between">
                   <strong>
                     {value.developer.name}
