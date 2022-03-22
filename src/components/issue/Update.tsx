@@ -2,6 +2,7 @@ import Router from "next/router";
 import styled from "styled-components";
 import Button from "../common/Button";
 import TipTap from "../common/TipTap";
+import IssueEditor from "../editor/IssueEditor";
 
 const WriteStyle = styled.div`
     height:100%;
@@ -47,12 +48,12 @@ const Update = ({ editorRef, updIssue, title, setTitle, tag, setChangeTag, setDe
         <h2>태그</h2>
         <input type='text' placeholder="태그를 입력후 Enter를 눌러주세요" onKeyUp={setChangeTag} className="tag" />
         <DetailTagStyle>
-            {tag && tag.map((value: any, index: any) => {
+            {[tag] && [tag].map((value: any, index: any) => {
                 return <span onClick={() => setDeleteTag(index)} key={index}># {value}</span>
             })}
         </DetailTagStyle>
         <h2 style={{ marginBottom: '1rem', marginTop: '0.5rem' }}>내용</h2>
-        <TipTap isEditable={true} height="300px" mode="editor" editorRef={editorRef} />
+        <IssueEditor height="300px" editorRef={editorRef}/>
         <Button onClick={updIssue} fullWidth>이슈 수정</Button>
         <br />
     </WriteStyle>

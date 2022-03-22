@@ -6,6 +6,7 @@ import Button from "../common/Button";
 import Router from "next/router";
 import React, { useState } from "react";
 import CommentList from "./CommentList";
+import IssueViewer from "../editor/IssueViewer";
 const DetailStyle = styled.div`
   height: 100%;
   display: flex;
@@ -135,12 +136,13 @@ const Detail = ({
       </DetailTagStyle>
       <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
       <DetailContentStyle>
-        <TipTap
+        <IssueViewer height="300px" content={detail.content} />
+        {/* <TipTap
           isEditable={false}
           height="300px"
           mode="reader"
           content={detail.content}
-        />
+        /> */}
       </DetailContentStyle>
       <hr style={{ border: "1px solid #d1d1d1", width: "100%" }} />
       <DetailProfileStyle>
